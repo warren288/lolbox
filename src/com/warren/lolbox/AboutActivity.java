@@ -17,7 +17,7 @@ import com.warren.lolbox.model.SimpleTool;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
- * 关于Activity，你妹妹
+ * 关于Activity
  * @author yangsheng
  * @date 2015年2月25日
  */
