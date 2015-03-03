@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="darkdarkblue">#11151E</color>
+    <color name="darkblue">#021E36</color>
+    <color name="greenblue">#66D2FF</color>
+    <color name="bluegreen">#4980CB</color>
+    <color name="main_blue">#3762A1</color>
+    <color name="lightgrey">#F0F0F0</color>
+    <color name="dlg_background">#3F4653</color>
+    <color name="transparent">#00000000</color>
+    <color name="halftransparent_white">#6F000000</color>
+    <color name="halftransparent_black">#0FFFFFFF</color>
+    <color name="halftransparent_white_darker">#8F000000</color>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        warren:left_img="@drawable/lolbox_titleview_return_default"
+        warren:left_imgbackground="@drawable/bg_btn_title"
+        warren:right_imgbackground="@drawable/bg_btn_title"
+        warren:title="最佳阵容"
+        warren:titleColor="@color/greenblue"
+        warren:titleSize="9sp" />
+
+    <ListView
+        android:id="@+id/lv_groups"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightgrey"
+        android:divider="@color/lightgrey"
+        android:dividerHeight="6dp" >
+    </ListView>
+
+</LinearLayout>

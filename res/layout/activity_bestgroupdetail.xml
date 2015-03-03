@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightgrey"
+    android:orientation="vertical" >
+
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        warren:left_img="@drawable/lolbox_titleview_return_default"
+        warren:left_imgbackground="@drawable/bg_btn_title"
+        warren:right_imgbackground="@drawable/bg_btn_title"
+        warren:title="阵容详情"
+        warren:titleColor="@color/greenblue"
+        warren:titleSize="9sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_destitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="阵容介绍"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/img_1"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <ImageView
+                        android:id="@+id/img_2"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <ImageView
+                        android:id="@+id/img_3"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <ImageView
+                        android:id="@+id/img_4"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <ImageView
+                        android:id="@+id/img_5"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="阵容英雄"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp" >
+
+                    <ImageView
+                        android:id="@+id/img_des_1"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <TextView
+                        android:id="@+id/tv_des_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp">
+
+                    <ImageView
+                        android:id="@+id/img_des_2"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <TextView
+                        android:id="@+id/tv_des_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp" >
+
+                    <ImageView
+                        android:id="@+id/img_des_3"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <TextView
+                        android:id="@+id/tv_des_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp" >
+
+                    <ImageView
+                        android:id="@+id/img_des_4"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <TextView
+                        android:id="@+id/tv_des_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp" >
+
+                    <ImageView
+                        android:id="@+id/img_des_5"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:paddingRight="2dp" />
+
+                    <TextView
+                        android:id="@+id/tv_des_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
