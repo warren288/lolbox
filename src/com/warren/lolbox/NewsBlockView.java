@@ -326,19 +326,29 @@ public class NewsBlockView {
 		}
 
 		@Override
+		public int getItemViewType(int position) {
+			if(mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD)){
+				return position == 1 ? 0 : 1;
+			} else {
+				return 0;
+			}
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			return mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD) ? 2 : 1;
+		}
+
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			if (mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD) && position == 0) {
-				ViewHolder holder = new ViewHolder();
-				holder.originPostion = 0;
-
 				initHead(parent);
-				mVpHead.setTag(holder);
 				return mVpHead;
 			}
 
 			ViewHolder holder;
-			if (convertView == null || ((ViewHolder) convertView.getTag()).originPostion == 0) {
+			if (convertView == null || convertView.getTag() == null) {
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.frag_news_info_item,
 							parent, false);
 				holder = new ViewHolder();
@@ -347,7 +357,6 @@ public class NewsBlockView {
 				holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
 				holder.tvRead = (TextView) convertView.findViewById(R.id.tv_read);
 				holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
-				holder.originPostion = position;
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -376,7 +385,6 @@ public class NewsBlockView {
 			TextView tvContent;
 			TextView tvRead;
 			TextView tvTime;
-			int originPostion;
 		}
 
 	}
