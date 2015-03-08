@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.SimpleTool;
+import com.warren.lolbox.widget.TitleBar;
 
 /**
  * 发现Fragment
@@ -23,8 +24,10 @@ import com.warren.lolbox.model.SimpleTool;
  */
 public class FindFragment extends BaseContentFragment {
 
+	public static final String FRAGMENTNAME = "FindFragment";
 	private View mVRoot;
 	
+	private TitleBar mTb;
 	private ListView mLvFind;
 
 	private String[] mArrFind = { "关于" };
@@ -51,7 +54,11 @@ public class FindFragment extends BaseContentFragment {
 	}
 	
 	private void initCtrl(){
+		mTb = (TitleBar) mVRoot.findViewById(R.id.titlebar);
 		mLvFind = (ListView) mVRoot.findViewById(R.id.lv_find);
+		
+		mTb.setLeftVisibility(View.INVISIBLE);
+		mTb.setRightVisibility(View.INVISIBLE);
 		
 		List<SimpleTool> items = new ArrayList<SimpleTool>();
 		items.add(new SimpleTool(-1, "关于"));
@@ -73,7 +80,12 @@ public class FindFragment extends BaseContentFragment {
 
 	@Override
 	public String getName() {
-		return null;
+		return FRAGMENTNAME;
+	}
+
+	@Override
+	public View getRootView() {
+		return mVRoot;
 	}
 
 }

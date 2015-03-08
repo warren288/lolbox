@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        warren:left_img="@drawable/lolbox_search_btn_unpressed"
+        warren:left_imgbackground="@drawable/bg_btn_title"
+        warren:right_img="@drawable/box_more_icon"
+        warren:right_imgbackground="@drawable/bg_btn_title"
+        warren:title="发现"
+        warren:titleColor="@color/greenblue"
+        warren:titleSize="9sp" />
     <ListView
         android:id="@+id/lv_find"
         style="@style/commonListView"

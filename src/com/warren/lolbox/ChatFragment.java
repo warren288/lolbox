@@ -26,4 +26,9 @@ public class ChatFragment extends BaseContentFragment{
 	public String getName() {
 		return null;
 	}
+
+	@Override
+	public View getRootView() {
+		return null;
+	}
 }

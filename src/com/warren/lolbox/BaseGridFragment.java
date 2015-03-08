@@ -214,4 +214,9 @@ public class BaseGridFragment extends BaseContentFragment {
 		return FRAGMENTNAME;
 	}
 
+	@Override
+	public View getRootView() {
+		return null;
+	}
+
 }

@@ -229,4 +229,9 @@ public class ToolFragment extends BaseContentFragment {
 
 	}
 
+	@Override
+	public View getRootView() {
+		return null;
+	}
+
 }

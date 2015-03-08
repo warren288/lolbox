@@ -1,18 +1,20 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.IListener;
+import com.warren.lolbox.model.MultiOper;
 
 /**
  * 主界面
  * @author warren
  * @date 2014年12月28日
  */
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
 	private FootFragment mFootFrag;
 
@@ -22,6 +24,8 @@ public class MainActivity extends Activity {
 	private IListener<Integer> mListener;
 	private BaseContentFragment[] mFragContents = new BaseContentFragment[5];
 	private int mCurrentFragIndex = 0;
+	
+	private MultiOper mBackOper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,18 @@ public class MainActivity extends Activity {
 		};
 
 		initFrags();
+		
+		mBackOper = new MultiOper(KeyEvent.KEYCODE_BACK).registerListener(new IListener<Integer>() {
+
+			@Override
+			public void onCall(Integer t) {
+				if (t == 1) {
+					Toast.makeText(MainActivity.this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
+				} else if (t == 2) {
+					finish();
+				}
+			}
+		});
 	}
 
 	/**
@@ -86,5 +102,20 @@ public class MainActivity extends Activity {
 
 		tranc.commit();
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			mBackOper.executeOper(keyCode);
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
+	}
 }

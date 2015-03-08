@@ -185,4 +185,9 @@ public class FootFragment extends Fragment implements IBaseFragment {
 		return "MainFootFragment";
 	}
 
+	@Override
+	public View getRootView() {
+		return null;
+	}
+
 }
