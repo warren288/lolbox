@@ -15,15 +15,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.warren.lolbox.widget.TitleBar;
 
 /**
  * 搜索召唤师详细信息Activity
@@ -44,10 +43,8 @@ public class SearchSummonerActivity extends Activity {
 	private static String[] arrServers = { "电信一", "电信二", "电信三", "电信四", "电信五", "电信六", "电信七", "电信八",
 			"电信九", "电信十", "电信十一", "电信十二", "电信十三", "电信十四", "电信十五", "电信十六", "电信十七", "电信十八", "电信十九",
 			"网通一", "网通二", "网通三", "网通四", "网通五", "网通六", "网通七", "教育一" };
-
-	private ImageView mImgTitleLeft;
-	private ImageView mImgTitleRight;
-	private TextView mTvTitle;
+	
+	private TitleBar mTb;
 	private EditText mEtSummonerName;
 	private Spinner mSpServer;
 	private Button mBtnSearch;
@@ -63,14 +60,8 @@ public class SearchSummonerActivity extends Activity {
 	}
 
 	private void initCtrl() {
-
-		mImgTitleLeft = (ImageView) findViewById(R.id.img_title_left);
-		mImgTitleRight = (ImageView) findViewById(R.id.img_title_right);
-		mTvTitle = (TextView) findViewById(R.id.tv_title);
-
-		mImgTitleLeft.setImageResource(R.drawable.lolbox_titleview_return_default);
-		mTvTitle.setText("搜索");
-		mImgTitleRight.setVisibility(View.GONE);
+		
+		mTb = (TitleBar) findViewById(R.id.titlebar);
 
 		mEtSummonerName = (EditText) findViewById(R.id.et_summonername);
 		mSpServer = (Spinner) findViewById(R.id.sp_servername);
@@ -81,13 +72,6 @@ public class SearchSummonerActivity extends Activity {
 					arrServerNames);
 		mSpServer.setAdapter(adapterSp);
 
-		mImgTitleLeft.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 
 		mSpServer.setOnItemSelectedListener(new OnItemSelectedListener() {
 

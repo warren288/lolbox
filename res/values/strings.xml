@@ -18,8 +18,8 @@
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
     <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
     <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
-    <string name="author_info">昇哥\nCSDN博客:blog.csdn.net/warren288\nQQ:1127299450</string>
+    <string name="author_info">昇哥\nCSDN博客:blog.csdn.net/warren288\nQQ:1127299450\n项目主页:https://github.com/warren288/lolbox</string>
     <string name="author_reference">本软件是出于学习交流目的，模仿多玩官方LOL盒子，使用多玩官方服务制作而成。如有侵权，请及时告知。\n官方应用正在持续更新，时间原因，本软件的功能无法做到与官方应用同步。部分功能也可能因为官方服务接口的变化而失效，如您发现此类问题，请联系本人。如有其他问题，也请联系本人。使用QQ加好友时请说明来意。    </string>
-    <string name="help_feedback">昇哥\nCSDN博客:blog.csdn.net/warren288\nQQ:1127299450</string>
+    <string name="help_feedback">昇哥\nCSDN博客:blog.csdn.net/warren288\nQQ:1127299450\n项目主页:https://github.com/warren288/lolbox</string>
 
 </resources>

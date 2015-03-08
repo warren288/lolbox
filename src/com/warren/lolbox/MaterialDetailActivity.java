@@ -16,6 +16,7 @@ import com.warren.lolbox.url.DuowanConfig.EnumDPI;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.DeviceUtil;
 import com.warren.lolbox.util.StringUtils;
+import com.warren.lolbox.widget.TitleBar;
 
 /**
  * 物品详情
@@ -25,10 +26,7 @@ import com.warren.lolbox.util.StringUtils;
 public class MaterialDetailActivity extends Activity {
 
 	public static final String EXTRA_MATERIALID = "EXTRA_MATERIALID";
-
-	private ImageView mImgLeft;
-	private ImageView mImgRight;
-	private TextView mTvTitle;
+	private TitleBar mTb;
 
 	private LinearLayout mLlRoot;
 	private ImageView mImgMaterial;
@@ -58,20 +56,7 @@ public class MaterialDetailActivity extends Activity {
 
 	private void initCtrl() {
 
-		mImgLeft = (ImageView) findViewById(R.id.img_title_left);
-		mImgRight = (ImageView) findViewById(R.id.img_title_right);
-		mTvTitle = (TextView) findViewById(R.id.tv_title);
-
-		mImgLeft.setImageResource(R.drawable.lolbox_titleview_return_default);
-		mImgRight.setVisibility(View.GONE);
-		mTvTitle.setText("物品详情");
-		mImgLeft.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		mTb = (TitleBar) findViewById(R.id.titlebar);
 
 		mLlRoot = (LinearLayout) findViewById(R.id.ll_root);
 		mLlNeed = (LinearLayout) findViewById(R.id.ll_need);

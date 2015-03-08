@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightgrey"
     android:orientation="vertical" >
 
-    <include layout="@layout/title_simple" />
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        warren:left_img="@drawable/lolbox_titleview_return_default"
+        warren:title="物品详情" />
 
     <LinearLayout
         android:id="@+id/ll_root"

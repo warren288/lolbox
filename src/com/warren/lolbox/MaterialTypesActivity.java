@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -15,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.warren.lolbox.url.DuowanConfig.EnumZBType;
+import com.warren.lolbox.widget.TitleBar;
 
 /**
  * 物品分类
@@ -23,13 +23,11 @@ import com.warren.lolbox.url.DuowanConfig.EnumZBType;
  */
 public class MaterialTypesActivity extends Activity {
 
-	private ImageView mImgLeft;
-	private ImageView mImgRight;
-	private TextView mTvTitle;
+	private TitleBar mTb;
 	private ListView mLvLst;
 
 	private String[] mArrTypes = EnumZBType.getStringTypeArray();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,16 +37,11 @@ public class MaterialTypesActivity extends Activity {
 
 	private void initCtrl() {
 
-		mImgLeft = (ImageView) findViewById(R.id.img_title_left);
-		mImgRight = (ImageView) findViewById(R.id.img_title_right);
-		mTvTitle = (TextView) findViewById(R.id.tv_title);
-
-		mImgLeft.setImageResource(R.drawable.lolbox_titleview_return_default);
-		mImgRight.setVisibility(View.GONE);
-		mTvTitle.setText("物品分类");
-
+		mTb = (TitleBar) findViewById(R.id.titlebar);
 		mLvLst = (ListView) findViewById(R.id.lv_types);
-
+		
+		mTb.setText("物品分类");
+		
 		AdapterList adapter = new AdapterList(LayoutInflater.from(this), mArrTypes);
 
 		mLvLst.setAdapter(adapter);
@@ -60,13 +53,6 @@ public class MaterialTypesActivity extends Activity {
 				openNextActivity(position);
 			}
 		});
-		mImgLeft.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 	}
 
 	/**
@@ -76,7 +62,7 @@ public class MaterialTypesActivity extends Activity {
 	private void openNextActivity(int position) {
 
 		Intent it = new Intent(this, MaterialGridWithTypeActivity.class);
-		
+
 		it.putExtra(MaterialGridWithTypeActivity.EXTRA_ZBTYPE, mArrTypes[position]);
 		startActivity(it);
 		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
@@ -86,8 +72,8 @@ public class MaterialTypesActivity extends Activity {
 
 		private LayoutInflater mInflater;
 		private String[] mArrTypes;
-		
-		public AdapterList(LayoutInflater inflater,  String[] arrType) {
+
+		public AdapterList(LayoutInflater inflater, String[] arrType) {
 			this.mInflater = inflater;
 			this.mArrTypes = arrType;
 		}
