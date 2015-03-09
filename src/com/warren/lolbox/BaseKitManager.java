@@ -13,7 +13,7 @@ public class BaseKitManager {
 	/**
 	 * 打开英雄详情页面
 	 * @param activity
-	 * @param strUrl
+	 * @param strHeroEnName
 	 */
 	public static void openHeroDetail(BaseActivity activity, String strHeroEnName) {
 
@@ -24,7 +24,7 @@ public class BaseKitManager {
 	/**
 	 * 打开物品详情页面
 	 * @param activity
-	 * @param strUrl
+	 * @param strMaterialId
 	 */
 	public static void openMaterialDetail(BaseActivity activity, String strMaterialId) {
 
