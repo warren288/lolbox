@@ -1,5 +1,8 @@
 package com.warren.lolbox;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -9,11 +12,11 @@ import com.warren.lolbox.util.LogTool;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
- * 召唤师详情Activity
+ * 最近比赛列表Activity
  * @author yangsheng
  * @date 2015年3月9日
  */
-public class SumonerDetailActivity extends BaseActivity {
+public class CombatListActivity extends BaseActivity {
 
 	public static final String EXTRA_CONTENTDATA = "CONTENTDATA";
 	public static final String EXTRA_URL = "FILEPATH";
@@ -24,13 +27,19 @@ public class SumonerDetailActivity extends BaseActivity {
 	private String mStrContent;
 	private String mStrURL;
 
+	private Map<String, String> mHeader;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_summonerdetail);
+		setContentView(R.layout.activity_combatdetail);
 
 		mStrContent = getIntent().getStringExtra(EXTRA_CONTENTDATA);
 		mStrURL = getIntent().getStringExtra(EXTRA_URL);
+
+		mHeader = new HashMap<String, String>();
+		mHeader.put("Dw-Guid", "0A1520BAA4D48A54755261EA62EA7212");
+		mHeader.put("Dw-Ua", "lolbox&2.0.9d-209&adr&xiaomi");
 
 		initCtrl();
 	}
@@ -38,6 +47,8 @@ public class SumonerDetailActivity extends BaseActivity {
 	private void initCtrl() {
 		mTb = (TitleBar) findViewById(R.id.titlebar);
 		mWvContent = (WebView) findViewById(R.id.wv_content);
+
+		mTb.setText("最近比赛");
 
 		WebSettings wbSet = mWvContent.getSettings();
 		wbSet.setDefaultTextEncodingName("utf-8");
@@ -51,7 +62,7 @@ public class SumonerDetailActivity extends BaseActivity {
 		if (mStrContent != null) {
 			mWvContent.loadDataWithBaseURL(null, mStrContent, "text/html", "utf-8", null);
 		} else if (mStrURL != null) {
-			mWvContent.loadUrl(mStrURL);
+			mWvContent.loadUrl(mStrURL, mHeader);
 		} else {
 			mWvContent.loadData("没有数据", "text/html", "utf-8");
 		}
@@ -60,19 +71,17 @@ public class SumonerDetailActivity extends BaseActivity {
 
 	}
 
-	class SummonerWebClient extends WebViewClient {
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String strUrl) {
-			LogTool.i("SummonerDetailActivity", "召唤师比赛URL: " + strUrl);
-
-			BaseKitManager.openUrl(SumonerDetailActivity.this, strUrl);
-			return true;
-		}
-	}
-
 	@Override
 	protected boolean goBack() {
 		return false;
 	}
 
+	class SummonerWebClient extends WebViewClient {
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String strUrl) {
+			LogTool.i("CombatListActivity", "召唤师比赛URL: " + strUrl);
+			BaseKitManager.openUrl(CombatListActivity.this, strUrl);
+			return true;
+		}
+	}
 }

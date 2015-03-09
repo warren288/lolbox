@@ -76,8 +76,9 @@ public class CombatDetailActivity extends BaseActivity {
 
 	class SummonerWebClient extends WebViewClient {
 		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			LogTool.i("SummonerDetailActivity", "召唤师比赛URL: " + url);
+		public boolean shouldOverrideUrlLoading(WebView view, String strUrl) {
+			LogTool.i("CombatDetailActivity", "召唤师比赛URL: " + strUrl);
+			BaseKitManager.openUrl(CombatDetailActivity.this, strUrl);
 			return true;
 		}
 	}
