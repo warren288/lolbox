@@ -20,7 +20,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author yangsheng
  * @date 2014年12月30日
  */
-public class BaikeActivity extends Activity {
+public class BaikeActivity extends BaseActivity {
 
 	private TitleBar mTb;
 	private ListView mLvLst;
@@ -79,6 +79,11 @@ public class BaikeActivity extends Activity {
 		Intent it = new Intent(this, mActivitys.get(position));
 		startActivity(it);
 		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

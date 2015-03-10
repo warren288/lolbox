@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2014年12月31日
  */
-public class MaterialTypesActivity extends Activity {
+public class MaterialTypesActivity extends BaseActivity {
 
 	private TitleBar mTb;
 	private ListView mLvLst;
@@ -116,5 +115,10 @@ public class MaterialTypesActivity extends Activity {
 			public TextView tv;
 		}
 
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 }

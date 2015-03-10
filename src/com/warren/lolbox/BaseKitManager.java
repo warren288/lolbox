@@ -2,6 +2,7 @@ package com.warren.lolbox;
 
 import android.content.Intent;
 
+import com.warren.lolbox.model.bean.SummonerAbility;
 import com.warren.lolbox.util.StringUtils;
 
 /**
@@ -54,6 +55,18 @@ public class BaseKitManager {
 		Intent intent = new Intent(activity, CombatDetailActivity.class);
 		intent.putExtra(CombatDetailActivity.EXTRA_URL, strUrl);
 		activity.startActivity(intent);
+	}
+	
+	/**
+	 * 打开召唤师技能详情界面
+	 * @param activity
+	 * @param sa
+	 */
+	public static void openSummonerSkillDetail(BaseActivity activity, SummonerAbility sa){
+		
+		Intent it = new Intent(activity, SummonerAbilityDetailActivity.class);
+		it.putExtra(SummonerAbilityDetailActivity.EXTRA_SUMMONERABILITY, sa);
+		activity.startActivity(it);
 	}
 
 	/**

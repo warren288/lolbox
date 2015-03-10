@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -25,7 +24,7 @@ import com.warren.lolbox.widget.ViewPagerIndicator;
  * @author warren
  * @date 2015年1月1日
  */
-public class HeroListActivity extends Activity {
+public class HeroListActivity extends BaseActivity {
 
 	private TitleBar mTb;
 	private ViewPagerIndicator mVpIndicator;
@@ -171,6 +170,11 @@ public class HeroListActivity extends Activity {
 			mVpIndicator.setViewPager(mVp, 0);
 			
 		}
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 	
 }

@@ -2,7 +2,6 @@ package com.warren.lolbox;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2015年1月3日
  */
-public class BestGroupActivity extends Activity {
+public class BestGroupActivity extends BaseActivity {
 
 	private TitleBar mTb;
 	private ListView mLv;
@@ -196,6 +195,11 @@ public class BestGroupActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

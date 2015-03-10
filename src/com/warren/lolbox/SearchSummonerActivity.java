@@ -4,7 +4,6 @@ import java.nio.charset.Charset;
 
 import org.apache.http.Header;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +28,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2014年12月28日
  */
-public class SearchSummonerActivity extends Activity {
+public class SearchSummonerActivity extends BaseActivity {
 
 	String strUrl = "http://zdl.mbox.duowan.com/phone/playerDetailNew.php?"
 				+ "sn=%E7%94%B5%E4%BF%A1%E5%8D%81%E5%9B%9B&pn=%E8%BF%98%E5%9C%A8%E7%AD%89%E5%BE%85";
@@ -152,6 +151,11 @@ public class SearchSummonerActivity extends Activity {
 		it.putExtra(SumonerDetailActivity.EXTRA_CONTENTDATA, strContent);
 		startActivity(it);
 		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

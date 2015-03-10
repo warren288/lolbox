@@ -1,7 +1,11 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 
-public class FuwenActivity extends Activity {
+public class FuwenActivity extends BaseActivity {
+
+	@Override
+	protected boolean goBack() {
+		return false;
+	}
 
 }

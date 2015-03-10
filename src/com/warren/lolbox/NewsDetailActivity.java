@@ -3,7 +3,6 @@ package com.warren.lolbox;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -13,7 +12,7 @@ import com.warren.lolbox.model.bean.NewsDetail;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.StringUtils;
 
-public class NewsDetailActivity extends Activity {
+public class NewsDetailActivity extends BaseActivity {
 
 	public static final String EXTRA_NEWSID = "EXTRA_NEWSID";
 
@@ -70,6 +69,11 @@ public class NewsDetailActivity extends Activity {
 
 			}
 		});
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

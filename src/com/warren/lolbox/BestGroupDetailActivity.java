@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +17,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2015年1月3日
  */
-public class BestGroupDetailActivity extends Activity {
+public class BestGroupDetailActivity extends BaseActivity {
 
 	public static final String EXTRA_BESTGROUP = "EXTRA_BESTGROUP";
 
@@ -133,5 +132,10 @@ public class BestGroupDetailActivity extends Activity {
 				break;
 			}
 		}
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 }

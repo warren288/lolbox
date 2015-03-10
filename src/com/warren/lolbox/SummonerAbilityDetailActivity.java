@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import com.warren.lolbox.url.URLUtil;
  * @author warren
  * @date 2015年1月4日
  */
-public class SummonerAbilityDetailActivity extends Activity {
+public class SummonerAbilityDetailActivity extends BaseActivity {
 
 	public static final String EXTRA_SUMMONERABILITY = "EXTRA_SUMMONERABILITY";
 	
@@ -50,6 +49,11 @@ public class SummonerAbilityDetailActivity extends Activity {
 		tvDes.setText(mSa.getDes());
 		tvHint.setText(mSa.getTips());
 		
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

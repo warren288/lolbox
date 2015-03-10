@@ -3,7 +3,6 @@ package com.warren.lolbox;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory.Options;
@@ -50,9 +49,9 @@ public class BaseGridFragment extends BaseContentFragment {
 	private List<HeroSimple> mLstHero;
 	private List<MaterialSimple> mLstMaterial;
 	private List<SummonerAbility> mLstSumAbility;
-	
+
 	private DisplayImageOptions mDisPlayOption;
-	
+
 	/**
 	 * 0/1/2 : 英雄/物品/技能
 	 */
@@ -95,11 +94,14 @@ public class BaseGridFragment extends BaseContentFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 				if (mType == 0) {
-					openHeroDetailActivity(mLstHero.get(position).getEnName());
-				} else if(mType == 1){
-					openMaterialDetail("" + mLstMaterial.get(position).getId());
-				} else if(mType == 2){
-					openSummonerSkillDetail(mLstSumAbility.get(position));
+					BaseKitManager.openHeroDetail((BaseActivity) getActivity(),
+								mLstHero.get(position).getEnName());
+				} else if (mType == 1) {
+					BaseKitManager.openMaterialDetail((BaseActivity) getActivity(), ""
+								+ mLstMaterial.get(position).getId());
+				} else if (mType == 2) {
+					BaseKitManager.openSummonerSkillDetail((BaseActivity) getActivity(),
+								mLstSumAbility.get(position));
 				}
 			}
 		});
@@ -140,7 +142,7 @@ public class BaseGridFragment extends BaseContentFragment {
 						URLUtil.getURL_SummonerSkillImg(material.getId()), material.getName());
 			mLstSnt.add(snt);
 		}
-		
+
 		Options opt = new Options();
 		opt.inInputShareable = true;
 		opt.inPurgeable = true;
@@ -155,58 +157,19 @@ public class BaseGridFragment extends BaseContentFragment {
 
 						@Override
 						public void display(Bitmap arg0, ImageAware arg1, LoadedFrom arg2) {
-							
+
 							// 由于请求的图片较小，在分辨率较大的设备上显示不美观。这里在显示前先放大到两倍，再显示。
 							// 放大到两倍后，经检查大部分手机分辨率都能较好地展示，而放大后的图片对某一分辨率来说太大时，
 							// 可通过设置ImageView的ScaleType来将自动将图片缩小。
-							
+
 							Matrix matrix = new Matrix();
-							matrix.postScale(2, 2); 
+							matrix.postScale(2, 2);
 							Bitmap bitResize = Bitmap.createBitmap(arg0, 0, 0, arg0.getWidth(),
 										arg0.getHeight(), matrix, true);
 							arg1.setImageBitmap(bitResize);
 						}
 					}).cacheInMemory(true).showImageOnLoading(R.drawable.dl_loading_img)
 					.imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();
-	}
-
-	/**
-	 * 打开英雄详情界面
-	 * @param strHeroEnName
-	 */
-	private void openHeroDetailActivity(String strHeroEnName) {
-
-		Intent it = new Intent(getActivity(), HeroDetailActivity.class);
-		it.putExtra(HeroDetailActivity.EXTRA_HEROENNAME, strHeroEnName);
-		startActivity(it);
-		getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-					android.R.anim.slide_out_right);
-	}
-
-	/**
-	 * 打开物品详情界面
-	 * @param materialId
-	 */
-	private void openMaterialDetail(String materialId) {
-
-		Intent it = new Intent(getActivity(), MaterialDetailActivity.class);
-		it.putExtra(MaterialDetailActivity.EXTRA_MATERIALID, materialId);
-		startActivity(it);
-		getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-					android.R.anim.slide_out_right);
-	}
-	
-	/**
-	 * 打开召唤师技能详情界面
-	 * @param sa
-	 */
-	private void openSummonerSkillDetail(SummonerAbility sa){
-		
-		Intent it = new Intent(getActivity(), SummonerAbilityDetailActivity.class);
-		it.putExtra(SummonerAbilityDetailActivity.EXTRA_SUMMONERABILITY, sa);
-		startActivity(it);
-		getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-					android.R.anim.slide_out_right);
 	}
 
 	@Override

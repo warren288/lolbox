@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +22,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2014年12月31日
  */
-public class MaterialDetailActivity extends Activity {
+public class MaterialDetailActivity extends BaseActivity {
 
 	public static final String EXTRA_MATERIALID = "EXTRA_MATERIALID";
 	private TitleBar mTb;
@@ -214,6 +213,11 @@ public class MaterialDetailActivity extends Activity {
 		it.putExtra(MaterialDetailActivity.EXTRA_MATERIALID, materialId);
 		startActivity(it);
 		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

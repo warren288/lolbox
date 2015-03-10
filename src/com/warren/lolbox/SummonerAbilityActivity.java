@@ -2,7 +2,6 @@ package com.warren.lolbox;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,7 +10,7 @@ import com.warren.lolbox.model.bean.SummonerAbility;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.StringUtils;
 
-public class SummonerAbilityActivity extends Activity {
+public class SummonerAbilityActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +64,10 @@ public class SummonerAbilityActivity extends Activity {
 						}
 					});
 
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 }

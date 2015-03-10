@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +29,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2015年1月2日
  */
-public class HeroDetailActivity extends Activity {
+public class HeroDetailActivity extends BaseActivity {
 
 	public static final String EXTRA_HEROENNAME = "EXTRA_HEROENNAME";
 
@@ -543,6 +542,11 @@ public class HeroDetailActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

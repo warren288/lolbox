@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +26,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author yangsheng
  * @date 2015年1月31日
  */
-public class HeroVideoActivity extends Activity {
+public class HeroVideoActivity extends BaseActivity {
 	
 	public static final String EXTRA_HEROENG = "EXTRA_HEROENG";
 	public static final String EXTRA_HEROCHN = "EXTRA_HEROCHN";
@@ -156,5 +155,10 @@ public class HeroVideoActivity extends Activity {
 				});
 			}
 		});
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 }

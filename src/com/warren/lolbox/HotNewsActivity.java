@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +32,7 @@ import com.warren.lolbox.util.StringUtils;
  * @author warren
  * @date 2015年1月6日
  */
-public class HotNewsActivity extends Activity {
+public class HotNewsActivity extends BaseActivity {
 
 	private List<HotNewsBlock> mNewsBlock = new ArrayList<HotNewsBlock>();
 
@@ -293,6 +292,11 @@ public class HotNewsActivity extends Activity {
 			TextView tv3;
 		}
 
+	}
+
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }
