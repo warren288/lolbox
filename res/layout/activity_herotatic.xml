@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        warren:left_img="@drawable/lolbox_titleview_return_default"
+        warren:left_imgbackground="@drawable/bg_btn_title"
+        warren:right_imgbackground="@drawable/bg_btn_title"
+        warren:title="英雄出装"
+        warren:titleColor="@color/greenblue" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightgrey"
+            android:orientation="vertical"
+            android:paddingBottom="5dp" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:padding="5dp" >
+
+                <ImageView
+                    android:id="@+id/img_hero"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon" />
+
+                <TextView
+                    android:id="@+id/tv_heroname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_toRightOf="@id/img_hero"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_authorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_heroname"
+                    android:layout_margin="1dp"
+                    android:layout_toRightOf="@id/img_hero"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_hint_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="前期"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_qq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="bottom"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_qq_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_qq_jn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        warren:img_count="6"
+                        warren:img_height="40dp" />
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_qq_zb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        warren:img_count="6"
+                        warren:img_height="45dp" />
+
+                    <TextView
+                        android:id="@+id/tv_description_qq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="前期"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_hint_zq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="中期"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_zq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="bottom"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_zq_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_zq_jn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        warren:img_count="6"
+                        warren:img_height="40dp" />
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_zq_zb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        warren:img_count="6"
+                        warren:img_height="45dp" />
+
+                    <TextView
+                        android:id="@+id/tv_description_zq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="中期"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_hint_hq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="后期"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_hq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="bottom"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_hq_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_hq_jn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        warren:img_count="6"
+                        warren:img_height="40dp" />
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_hq_zb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        warren:img_count="6"
+                        warren:img_height="45dp" />
+
+                    <TextView
+                        android:id="@+id/tv_description_hq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="后期"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_hint_nf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="逆风"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_nf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="bottom"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_nf_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_nf_jn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        warren:img_count="6"
+                        warren:img_height="40dp" />
+
+                    <com.warren.lolbox.widget.ImageGroup
+                        android:id="@+id/imggp_nf_zb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        warren:img_count="6"
+                        warren:img_height="45dp" />
+
+                    <TextView
+                        android:id="@+id/tv_description_nf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="逆风"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

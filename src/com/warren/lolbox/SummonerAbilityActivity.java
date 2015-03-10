@@ -10,6 +10,11 @@ import com.warren.lolbox.model.bean.SummonerAbility;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.StringUtils;
 
+/**
+ * 召唤师技能Activity
+ * @author yangsheng
+ * @date 2015年3月10日
+ */
 public class SummonerAbilityActivity extends BaseActivity {
 
 	@Override

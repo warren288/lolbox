@@ -41,4 +41,12 @@
         android:paddingRight="10dp"
         android:paddingTop="5dp" />
 
+    <LinearLayout
+        android:id="@+id/ll_opers"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/img_title_right"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
 </RelativeLayout>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <declare-styleable name="ViewPagerIndicator">
         <attr name="item_count" format="integer" />
         <attr name="item_color" format="color|reference" />
         <attr name="item_color_select" format="color|reference" />
-        
     </declare-styleable>
     <declare-styleable name="TitleBar">
         <attr name="left_img" format="reference" />
@@ -16,16 +15,18 @@
         <attr name="titleColor" format="color|reference" />
         <attr name="titleSize" format="dimension" />
     </declare-styleable>
-    
+    <declare-styleable name="ImageGroup">
+        <attr name="img_count" format="integer" />
+        <attr name="img_height" format="dimension" />
+    </declare-styleable>
     <declare-styleable name="ImageChooser">
         <attr name="count" format="integer" />
         <attr name="foreground_choosed" format="reference|color" />
         <attr name="foreground_unchoosed" format="reference|color" />
         <attr name="img_width" format="dimension" />
-        <attr name="img_height" format="dimension" />
+        <!-- <attr name="img_height" format="dimension" /> -->
     </declare-styleable>
-    
-<declare-styleable name="PullToRefresh">
+    <declare-styleable name="PullToRefresh">
 
         <!-- A drawable to use as the background of the Refreshable View -->
         <attr name="ptrRefreshableViewBackground" format="reference|color" />
@@ -85,13 +86,13 @@
         <!--
             Whether PullToRefreshListView has it's extras enabled. This allows the user to be 
             able to scroll while refreshing, and behaves better. It acheives this by adding
-            Header and/or Footer Views to the ListView.
+            Header and/or Footer Views to the ListView.
         -->
         <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />
 
         <!--
             Whether the Drawable should be continually rotated as you pull. This only
-            takes effect when using the 'Rotate' Animation Style.
+            takes effect when using the 'Rotate' Animation Style.
         -->
         <attr name="ptrRotateDrawableWhilePulling" format="reference|boolean" />
 
@@ -100,4 +101,5 @@
         <attr name="ptrDrawableTop" format="reference" />
         <attr name="ptrDrawableBottom" format="reference" />
     </declare-styleable>
+
 </resources>

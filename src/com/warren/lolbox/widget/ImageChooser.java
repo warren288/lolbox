@@ -51,7 +51,7 @@ public class ImageChooser extends LinearLayout {
 		mDrawableForeGroundSelect = a.getDrawable(R.styleable.ImageChooser_foreground_choosed);
 		mDrawableForeGroundUnSelect = a.getDrawable(R.styleable.ImageChooser_foreground_unchoosed);
 		mImgWidth = (int) a.getDimension(R.styleable.ImageChooser_img_width, 40);
-		mImgHeight = (int) a.getDimension(R.styleable.ImageChooser_img_height, 40);
+		mImgHeight = 40;//(int) a.getDimension(R.styleable.ImageChooser_img_height, 40);
 		mCount = a.getInteger(R.styleable.ImageChooser_count, 5);
 
 		mArrFrameLayout = new FrameLayout[mCount];

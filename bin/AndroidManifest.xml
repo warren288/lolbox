@@ -97,6 +97,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
         <activity
+            android:name="com.warren.lolbox.HeroTaticActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+        </activity>
+        <activity
             android:name="com.warren.lolbox.BestGroupActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>

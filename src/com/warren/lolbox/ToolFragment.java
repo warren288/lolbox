@@ -67,15 +67,15 @@ public class ToolFragment extends BaseContentFragment {
 					R.string.toolmenu_reflecttest);
 		SimpleTool stBaike = new SimpleTool(R.drawable.tool_menu_baike, R.string.toolmenu_baike);
 
-		mTools.add(stBMYX);
 		mTools.add(stHero);
+		mTools.add(stBaike);
+		mTools.add(stNews);
+		mTools.add(stBMYX);
 		mTools.add(stVideo);
 		mTools.add(stShake);
 		mTools.add(stLottery);
-		mTools.add(stNews);
 		mTools.add(stLiveShow);
 		mTools.add(stReflectTest);
-		mTools.add(stBaike);
 	}
 
 	private void initCtrl() {
@@ -110,13 +110,14 @@ public class ToolFragment extends BaseContentFragment {
 				// builder.show();
 
 				new MessageDialog(getActivity()).setTitle("测试测试").setMessage("测试内容\n测试内容2")
-							.setPositiveButton("确定", null).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							.setPositiveButton("确定", null)
+							.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									Toast.makeText(getActivity(), "取消了", Toast.LENGTH_SHORT).show();
 								}
-								
+
 							}).show();
 
 			}
@@ -139,20 +140,20 @@ public class ToolFragment extends BaseContentFragment {
 
 	private void openGridActivity(int position) {
 
-		if (position == 1) {
+		if (position == 0) {
 			Intent it = new Intent(getActivity(), HeroListActivity.class);
 			startActivity(it);
 			getActivity().overridePendingTransition(android.R.anim.slide_in_left,
 						android.R.anim.slide_out_right);
-		} else if (position == 5) {
+		} else if (position == 1) {
 
-			Intent it = new Intent(getActivity(), HotNewsActivity.class);
+			Intent it = new Intent(getActivity(), BaikeActivity.class);
 			startActivity(it);
 			getActivity().overridePendingTransition(android.R.anim.slide_in_left,
 						android.R.anim.slide_out_right);
-		} else if (position == 8) {
+		} else if (position == 2) {
 
-			Intent it = new Intent(getActivity(), BaikeActivity.class);
+			Intent it = new Intent(getActivity(), HotNewsActivity.class);
 			startActivity(it);
 			getActivity().overridePendingTransition(android.R.anim.slide_in_left,
 						android.R.anim.slide_out_right);

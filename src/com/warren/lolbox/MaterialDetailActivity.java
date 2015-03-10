@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -196,23 +195,11 @@ public class MaterialDetailActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 
-				openMaterialDetail(materialId);
+				BaseKitManager.openMaterialDetail(MaterialDetailActivity.this, materialId);
 			}
 		});
 
 		return img;
-	}
-
-	/**
-	 * 打开物品详情界面
-	 * @param materialId
-	 */
-	private void openMaterialDetail(String materialId) {
-
-		Intent it = new Intent(this, MaterialDetailActivity.class);
-		it.putExtra(MaterialDetailActivity.EXTRA_MATERIALID, materialId);
-		startActivity(it);
-		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 	}
 
 	@Override

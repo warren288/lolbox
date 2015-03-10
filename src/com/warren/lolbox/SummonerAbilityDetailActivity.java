@@ -35,7 +35,7 @@ public class SummonerAbilityDetailActivity extends BaseActivity {
 
 	private void initCtrl() {
 
-		ImageView imgSkill = (ImageView) findViewById(R.id.img_skill);
+		ImageView imgSkill = (ImageView) findViewById(R.id.img_hero);
 		TextView tvName = (TextView) findViewById(R.id.tv_skillname);
 		TextView tvLevel = (TextView) findViewById(R.id.tv_level);
 		TextView tvCoolDown = (TextView) findViewById(R.id.tv_cooldown);

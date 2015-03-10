@@ -80,6 +80,9 @@ public class FootFragment extends Fragment implements IBaseFragment {
 		mLlChat.setOnClickListener(new OnOperClick());
 		mLlAction.setOnClickListener(new OnOperClick());
 		mLlFind.setOnClickListener(new OnOperClick());
+		// 屏蔽未实现功能
+		mLlChat.setVisibility(View.GONE);
+		mLlAction.setVisibility(View.GONE);
 	}
 
 	/**

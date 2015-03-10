@@ -111,9 +111,8 @@ public class HeroDetailActivity extends BaseActivity {
 	private void initCtrl() {
 
 		mTb = (TitleBar) findViewById(R.id.titlebar);
-		mTb.setRightVisibility(View.GONE);
 
-		mImgHero = (ImageView) findViewById(R.id.img_skill);
+		mImgHero = (ImageView) findViewById(R.id.img_hero);
 		mTvHeroName = (TextView) findViewById(R.id.tv_heroname);
 		mTvTag = (TextView) findViewById(R.id.tv_tag);
 		mTvPrice = (TextView) findViewById(R.id.tv_price);

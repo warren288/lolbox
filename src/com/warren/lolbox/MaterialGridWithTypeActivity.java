@@ -3,8 +3,6 @@ package com.warren.lolbox;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory.Options;
@@ -37,7 +35,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2014年12月31日
  */
-public class MaterialGridWithTypeActivity extends Activity {
+public class MaterialGridWithTypeActivity extends BaseActivity {
 
 	public static final String EXTRA_ZBTYPE = "EXTRA_ZBTYPE";
 
@@ -176,22 +174,16 @@ public class MaterialGridWithTypeActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				openMaterialDetail("" + mLstMs.get(position).getId());
+
+				BaseKitManager.openMaterialDetail(MaterialGridWithTypeActivity.this, ""
+							+ mLstMs.get(position).getId());
 			}
 		});
-
 	}
 
-	/**
-	 * 打开物品详情界面
-	 * @param materialId
-	 */
-	private void openMaterialDetail(String materialId) {
-
-		Intent it = new Intent(this, MaterialDetailActivity.class);
-		it.putExtra(MaterialDetailActivity.EXTRA_MATERIALID, materialId);
-		startActivity(it);
-		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+	@Override
+	protected boolean goBack() {
+		return false;
 	}
 
 }

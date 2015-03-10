@@ -1,5 +1,7 @@
 package com.warren.lolbox.widget;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -25,7 +27,10 @@ public class TitleBar extends RelativeLayout {
 
 	private View.OnClickListener mLeftClickListener;
 	private View.OnClickListener mRightClickListener;
+	private View.OnClickListener mTitleClickListener;
 
+	private List<View> mLstChilds;
+	
 	public TitleBar(Context context) {
 		super(context);
 	}
@@ -45,6 +50,7 @@ public class TitleBar extends RelativeLayout {
 	 * @param attrs
 	 */
 	private void init(AttributeSet attrs) {
+		
 		LayoutInflater.from(getContext()).inflate(R.layout.titlebar, this, true);
 		mImgLeft = (ImageView) findViewById(R.id.img_title_left);
 		mImgRight = (ImageView) findViewById(R.id.img_title_right);
@@ -83,6 +89,7 @@ public class TitleBar extends RelativeLayout {
 		}
 
 		a.recycle();
+		
 	}
 
 	// private void init(AttributeSet attrs) {
@@ -194,6 +201,15 @@ public class TitleBar extends RelativeLayout {
 		this.mImgRight.setOnClickListener(mRightClickListener);
 	}
 
+	/**
+	 * 设置标题栏标题的点击事件
+	 * @param listener
+	 */
+	public void setTitleClick(View.OnClickListener listener){
+		this.mTitleClickListener = listener;
+		this.mTvTitle.setOnClickListener(mTitleClickListener);
+	}
+	
 	/**
 	 * 标题栏文字
 	 * @param strText
