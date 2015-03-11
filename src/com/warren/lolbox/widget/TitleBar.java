@@ -1,18 +1,25 @@
 package com.warren.lolbox.widget;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.warren.lolbox.R;
+import com.warren.lolbox.model.IListener;
+import com.warren.lolbox.util.DeviceUtil;
 
 /**
  * 标题栏
@@ -20,6 +27,8 @@ import com.warren.lolbox.R;
  * @date 2015年1月1日
  */
 public class TitleBar extends RelativeLayout {
+
+	private static final String SPLIT_OPER = "\\|";
 
 	private ImageView mImgLeft;
 	private ImageView mImgRight;
@@ -29,8 +38,17 @@ public class TitleBar extends RelativeLayout {
 	private View.OnClickListener mRightClickListener;
 	private View.OnClickListener mTitleClickListener;
 
-	private List<View> mLstChilds;
-	
+	private IListener<String> mListenerOper;
+
+	private LinearLayout mLlRightOpers;
+	private List<TextView> mLstRightOperViews;
+	private List<String> mLstRightOpers;
+
+	android.widget.LinearLayout.LayoutParams mParamTv;
+
+	// private LayoutParams mParamRightOpersNormal;
+	// private LayoutParams mParamRightOpersNoRightImg;
+
 	public TitleBar(Context context) {
 		super(context);
 	}
@@ -50,31 +68,49 @@ public class TitleBar extends RelativeLayout {
 	 * @param attrs
 	 */
 	private void init(AttributeSet attrs) {
-		
+
 		LayoutInflater.from(getContext()).inflate(R.layout.titlebar, this, true);
 		mImgLeft = (ImageView) findViewById(R.id.img_title_left);
 		mImgRight = (ImageView) findViewById(R.id.img_title_right);
 		mTvTitle = (TextView) findViewById(R.id.tv_title);
+		mLlRightOpers = (LinearLayout) findViewById(R.id.ll_opers);
+
+		// mParamRightOpersNormal = new LayoutParams(LayoutParams.WRAP_CONTENT,
+		// LayoutParams.MATCH_PARENT);
+		// mParamRightOpersNormal.addRule(RelativeLayout.LEFT_OF,
+		// R.id.img_title_right);
+		//
+		// mParamRightOpersNoRightImg = new
+		// LayoutParams(LayoutParams.WRAP_CONTENT,
+		// LayoutParams.MATCH_PARENT);
+		// mParamRightOpersNoRightImg.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.TitleBar);
 		if (a.getDrawable(R.styleable.TitleBar_left_img) != null) {
 			mImgLeft.setImageDrawable(a.getDrawable(R.styleable.TitleBar_left_img));
 			mImgLeft.setVisibility(View.VISIBLE);
 		} else {
-			mImgLeft.setVisibility(View.GONE);
+			mImgLeft.setVisibility(View.INVISIBLE);
 		}
 		if (a.getDrawable(R.styleable.TitleBar_right_img) != null) {
 			mImgRight.setImageDrawable(a.getDrawable(R.styleable.TitleBar_right_img));
 			mImgRight.setVisibility(View.VISIBLE);
 		} else {
-			mImgRight.setVisibility(View.GONE);
+			mImgRight.setVisibility(View.INVISIBLE);
 		}
 		if (a.getString(R.styleable.TitleBar_title) != null) {
 			mTvTitle.setText(a.getString(R.styleable.TitleBar_title));
 			mTvTitle.setVisibility(View.VISIBLE);
 		} else {
-			mTvTitle.setVisibility(View.GONE);
+			mTvTitle.setVisibility(View.INVISIBLE);
 		}
+
+		mParamTv = new android.widget.LinearLayout.LayoutParams(
+					android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+					android.widget.LinearLayout.LayoutParams.MATCH_PARENT);
+
+		String strRightOper = a.getString(R.styleable.TitleBar_rightopers);
+		setRightOpers(strRightOper);
 
 		// 左键的默认操作是返回
 		if (mImgLeft.getVisibility() == View.VISIBLE && getContext() instanceof Activity) {
@@ -89,7 +125,12 @@ public class TitleBar extends RelativeLayout {
 		}
 
 		a.recycle();
-		
+
+		// if (mImgRight.getVisibility() == View.VISIBLE) {
+		// mLlRightOpers.setLayoutParams(mParamRightOpersNormal);
+		// } else {
+		// mLlRightOpers.setLayoutParams(mParamRightOpersNoRightImg);
+		// }
 	}
 
 	// private void init(AttributeSet attrs) {
@@ -168,6 +209,56 @@ public class TitleBar extends RelativeLayout {
 	// }
 
 	/**
+	 * 设置右边操作
+	 * @param strRightOper
+	 */
+	public void setRightOpers(String strRightOper) {
+
+		mLstRightOperViews = new ArrayList<TextView>();
+		mLlRightOpers.removeAllViews();
+
+		if (strRightOper != null && strRightOper.length() > 0) {
+			mLstRightOpers = Arrays.asList(strRightOper.split(SPLIT_OPER));
+			for (String strOper : mLstRightOpers) {
+				TextView tv = createOperTextView(strOper);
+				mLstRightOperViews.add(tv);
+				mLlRightOpers.addView(tv);
+				final String strFinal = strOper;
+				tv.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (mListenerOper != null) {
+							mListenerOper.onCall(strFinal);
+						}
+					}
+				});
+			}
+		}
+	}
+
+	private TextView createOperTextView(String strOper) {
+
+		TextView tv = new TextView(getContext());
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+		tv.setLayoutParams(mParamTv);
+		tv.setPadding(DeviceUtil.dp2Px(getContext(), 2), 0, DeviceUtil.dp2Px(getContext(), 2), 0);
+		tv.setGravity(Gravity.CENTER_VERTICAL);
+		tv.setTextColor(getResources().getColor(R.color.greenblue));
+		tv.setBackgroundResource(R.drawable.bg_btn_title);
+		tv.setText(strOper);
+		return tv;
+	}
+
+	/**
+	 * 设置右边操作
+	 * @param listener
+	 */
+	public void setRightOperListener(IListener<String> listener) {
+		this.mListenerOper = listener;
+	}
+
+	/**
 	 * 设置左边ImageView的可见性
 	 * @param visibility
 	 */
@@ -181,6 +272,11 @@ public class TitleBar extends RelativeLayout {
 	 */
 	public void setRightVisibility(int visibility) {
 		this.mImgRight.setVisibility(visibility);
+		// if (visibility == View.VISIBLE) {
+		// mLlRightOpers.setLayoutParams(mParamRightOpersNormal);
+		// } else {
+		// mLlRightOpers.setLayoutParams(mParamRightOpersNoRightImg);
+		// }
 	}
 
 	/**
@@ -205,11 +301,11 @@ public class TitleBar extends RelativeLayout {
 	 * 设置标题栏标题的点击事件
 	 * @param listener
 	 */
-	public void setTitleClick(View.OnClickListener listener){
+	public void setTitleClick(View.OnClickListener listener) {
 		this.mTitleClickListener = listener;
 		this.mTvTitle.setOnClickListener(mTitleClickListener);
 	}
-	
+
 	/**
 	 * 标题栏文字
 	 * @param strText

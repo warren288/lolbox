@@ -202,4 +202,16 @@ public class URLUtil {
 					page);
 	}
 
+	// http://box.dwstatic.com/apiNewsList.php?action=topic&topicId=55 HTTP/1.1
+
+	/**
+	 * 取指定新闻专题的数据
+	 * @param strTopicId
+	 * @return
+	 */
+	public static final String getURL_NewsTopic(String strTopicId) {
+		return String.format(Locale.CHINA,
+					"http://box.dwstatic.com/apiNewsList.php?action=topic&topicId=%s", strTopicId);
+	}
+
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -121,18 +120,19 @@ public class NewsBlockView {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				String strNewsId = mLstInfo.get(position - 1).getId();
-				openNewsDetail(strNewsId);
+
+				// pulltorefresh控件会导致这里的position比实际position大1，而附带的头部会导致一个额外的item
+				NewsInfo info = mLstInfo.get(isHasHead() ? position - 2 : position - 1);
+				if (info.getIsSubjectEntrance() == 1) {
+
+					String strTopicId = info.getSubjectId();
+					BaseKitManager.openNewsTopic((BaseActivity) mContext, strTopicId);
+				} else {
+					String strNewsId = info.getId();
+					BaseKitManager.openNewsDetail((BaseActivity) mContext, strNewsId);
+				}
 			}
 		});
-	}
-
-	private void openNewsDetail(String strNewsId) {
-		Intent it = new Intent(mContext, NewsDetailActivity.class);
-		it.putExtra(NewsDetailActivity.EXTRA_NEWSID, strNewsId);
-		mContext.startActivity(it);
-		// overridePendingTransition(android.R.anim.slide_in_left,
-		// android.R.anim.slide_out_right);
 	}
 
 	/**
@@ -225,6 +225,10 @@ public class NewsBlockView {
 								});
 	}
 
+	private boolean isHasHead() {
+		return mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD);
+	}
+
 	class AdapterViewPager extends PagerAdapter {
 
 		private View[] arrViewRoot;
@@ -259,7 +263,9 @@ public class NewsBlockView {
 
 				@Override
 				public void onClick(View v) {
-					openNewsDetail(mLstHead.get(position).getId());
+
+					BaseKitManager.openNewsDetail((BaseActivity) mContext, mLstHead.get(position)
+								.getId());
 				}
 			});
 
@@ -304,7 +310,7 @@ public class NewsBlockView {
 
 		@Override
 		public int getCount() {
-			return mLstInfo == null ? 0 : mLstInfo.size();
+			return mLstInfo == null || mLstInfo.size() == 0 ? 0 : mLstInfo.size() + 1;
 		}
 
 		@Override
@@ -327,7 +333,7 @@ public class NewsBlockView {
 
 		@Override
 		public int getItemViewType(int position) {
-			if(mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD)){
+			if (isHasHead()) {
 				return position == 1 ? 0 : 1;
 			} else {
 				return 0;
@@ -361,7 +367,7 @@ public class NewsBlockView {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			NewsInfo info = mLstInfo.get(position);
+			NewsInfo info = mLstInfo.get(isHasHead() ? position - 1 : position);
 			mImgLoader.displayImage(info.getPhoto(), holder.img);
 			holder.tvTitle.setText(info.getTitle());
 			holder.tvContent.setText(info.getContent());

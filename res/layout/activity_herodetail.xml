@@ -15,6 +15,7 @@
         warren:left_imgbackground="@drawable/bg_btn_title"
         warren:right_imgbackground="@drawable/bg_btn_title"
         warren:title="英雄详情"
+        warren:rightopers="出装"
         warren:titleColor="@color/greenblue"
         warren:titleSize="18sp" />
 

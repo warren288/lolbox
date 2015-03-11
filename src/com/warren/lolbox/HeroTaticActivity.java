@@ -43,7 +43,6 @@ public class HeroTaticActivity extends BaseActivity {
 	private ImageGroup mImgGpHqJn;
 	private ImageGroup mImgGpHqZb;
 	private TextView mTvHqDescription;
-	private ImageGroup mImgGpNfJn;
 	private ImageGroup mImgGpNfZb;
 	private TextView mTvNfDescription;
 
@@ -77,7 +76,6 @@ public class HeroTaticActivity extends BaseActivity {
 		mImgGpHqJn = (ImageGroup) findViewById(R.id.imggp_hq_jn);
 		mImgGpHqZb = (ImageGroup) findViewById(R.id.imggp_hq_zb);
 		mTvHqDescription = (TextView) findViewById(R.id.tv_description_hq);
-		mImgGpNfJn = (ImageGroup) findViewById(R.id.imggp_nf_jn);
 		mImgGpNfZb = (ImageGroup) findViewById(R.id.imggp_nf_zb);
 		mTvNfDescription = (TextView) findViewById(R.id.tv_description_nf);
 
@@ -153,25 +151,25 @@ public class HeroTaticActivity extends BaseActivity {
 					URLUtil.getURL_HeroAbilityImg(mStrHeroName, EnumAbility.R, EnumDPI.DPI64x64));
 
 		String[] arrSkill = hzt.getSkill().split(",");
-		String[] arrZbQq = hzt.getPre_cz().split(",");
-		String[] arrZbZq = hzt.getMid_cz().split(",");
-		String[] arrZbHq = hzt.getEnd_cz().split(",");
-		String[] arrZbNf = hzt.getNf_cz().split(",");
-		
+		final String[] arrZbQq = hzt.getPre_cz().split(",");
+		final String[] arrZbZq = hzt.getMid_cz().split(",");
+		final String[] arrZbHq = hzt.getEnd_cz().split(",");
+		final String[] arrZbNf = hzt.getNf_cz().split(",");
+
 		String[] arrZbUrlQq = new String[arrZbQq.length];
-		for(int i = 0; i < arrZbQq.length; i ++){
+		for (int i = 0; i < arrZbQq.length; i++) {
 			arrZbUrlQq[i] = URLUtil.getURL_ZBImg(Integer.parseInt(arrZbQq[i]), EnumDPI.DPI64x64);
 		}
 		String[] arrZbUrlZq = new String[arrZbZq.length];
-		for(int i = 0; i < arrZbZq.length; i ++){
+		for (int i = 0; i < arrZbZq.length; i++) {
 			arrZbUrlZq[i] = URLUtil.getURL_ZBImg(Integer.parseInt(arrZbZq[i]), EnumDPI.DPI64x64);
 		}
 		String[] arrZbUrlHq = new String[arrZbHq.length];
-		for(int i = 0; i < arrZbHq.length; i ++){
+		for (int i = 0; i < arrZbHq.length; i++) {
 			arrZbUrlHq[i] = URLUtil.getURL_ZBImg(Integer.parseInt(arrZbHq[i]), EnumDPI.DPI64x64);
 		}
 		String[] arrZbUrlNf = new String[arrZbNf.length];
-		for(int i = 0; i < arrZbNf.length; i ++){
+		for (int i = 0; i < arrZbNf.length; i++) {
 			arrZbUrlNf[i] = URLUtil.getURL_ZBImg(Integer.parseInt(arrZbNf[i]), EnumDPI.DPI64x64);
 		}
 
@@ -182,22 +180,19 @@ public class HeroTaticActivity extends BaseActivity {
 							mapSkillUrl.get(arrSkill[4]), mapSkillUrl.get(arrSkill[5]) });
 		mImgGpZqJn.displayImage(
 					imgLoader,
-					new String[] { mapSkillUrl.get(mapSkillUrl.get(arrSkill[6])),
-							mapSkillUrl.get(arrSkill[7]), mapSkillUrl.get(arrSkill[8]),
-							mapSkillUrl.get(arrSkill[9]), mapSkillUrl.get(arrSkill[10]),
-							mapSkillUrl.get(arrSkill[11]) });
-		mImgGpHqJn.displayImage(
-					imgLoader,
-					new String[] {mapSkillUrl.get(mapSkillUrl.get(arrSkill[12])),
-							mapSkillUrl.get(arrSkill[13]), mapSkillUrl.get(arrSkill[14]),
-							mapSkillUrl.get(arrSkill[15]), mapSkillUrl.get(arrSkill[16]),
-							mapSkillUrl.get(arrSkill[17]) });
+					new String[] { mapSkillUrl.get(arrSkill[6]), mapSkillUrl.get(arrSkill[7]),
+							mapSkillUrl.get(arrSkill[8]), mapSkillUrl.get(arrSkill[9]),
+							mapSkillUrl.get(arrSkill[10]), mapSkillUrl.get(arrSkill[11]) });
+		mImgGpHqJn.displayImage(imgLoader,
+					new String[] { mapSkillUrl.get(arrSkill[12]), mapSkillUrl.get(arrSkill[13]),
+							mapSkillUrl.get(arrSkill[14]), mapSkillUrl.get(arrSkill[15]),
+							mapSkillUrl.get(arrSkill[16]), mapSkillUrl.get(arrSkill[17]) });
 
 		mImgGpQqZb.displayImage(imgLoader, arrZbUrlQq);
 		mImgGpZqZb.displayImage(imgLoader, arrZbUrlZq);
 		mImgGpHqZb.displayImage(imgLoader, arrZbUrlHq);
 		mImgGpNfZb.displayImage(imgLoader, arrZbUrlNf);
-		
+
 		mImgGpQqJn.setOnClickListener(new IListener<Integer>() {
 
 			@Override
@@ -216,36 +211,40 @@ public class HeroTaticActivity extends BaseActivity {
 			public void onCall(Integer t) {
 			}
 		});
-		
+
 		mImgGpQqZb.setOnClickListener(new IListener<Integer>() {
 
 			@Override
 			public void onCall(Integer t) {
+				BaseKitManager.openMaterialDetail(HeroTaticActivity.this, arrZbQq[t]);
 			}
 		});
 		mImgGpZqZb.setOnClickListener(new IListener<Integer>() {
 
 			@Override
 			public void onCall(Integer t) {
+				BaseKitManager.openMaterialDetail(HeroTaticActivity.this, arrZbZq[t]);
 			}
 		});
 		mImgGpHqZb.setOnClickListener(new IListener<Integer>() {
 
 			@Override
 			public void onCall(Integer t) {
+				BaseKitManager.openMaterialDetail(HeroTaticActivity.this, arrZbHq[t]);
 			}
 		});
 		mImgGpNfZb.setOnClickListener(new IListener<Integer>() {
 
 			@Override
 			public void onCall(Integer t) {
+				BaseKitManager.openMaterialDetail(HeroTaticActivity.this, arrZbNf[t]);
 			}
 		});
-		
+
 	}
-	
-	private void initListener(){
-		
+
+	private void initListener() {
+
 	}
 
 	@Override

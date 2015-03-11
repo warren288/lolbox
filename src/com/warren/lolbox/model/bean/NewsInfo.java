@@ -21,6 +21,8 @@ public class NewsInfo {
 	private String type;
 	private String ymz_id;
 	private String comment_id;
+	private String subjectId;
+	private int isSubjectEntrance;
 
 	public NewsInfo() {
 	}
@@ -100,6 +102,20 @@ public class NewsInfo {
 	 */
 	public String getReadCount() {
 		return readCount;
+	}
+
+	/**
+	 * @return the subjectId
+	 */
+	public String getSubjectId() {
+		return subjectId;
+	}
+
+	/**
+	 * @param subjectId the subjectId to set
+	 */
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	/**
@@ -235,6 +251,20 @@ public class NewsInfo {
 		this.comment_id = comment_id;
 	}
 
+	/**
+	 * @return the isSubjectEntrance
+	 */
+	public int getIsSubjectEntrance() {
+		return isSubjectEntrance;
+	}
+
+	/**
+	 * @param isSubjectEntrance the isSubjectEntrance to set
+	 */
+	public void setIsSubjectEntrance(int isSubjectEntrance) {
+		this.isSubjectEntrance = isSubjectEntrance;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -244,7 +274,8 @@ public class NewsInfo {
 					+ weight + ", time=" + time + ", readCount=" + readCount + ", photo=" + photo
 					+ ", artId=" + artId + ", commentSum=" + commentSum + ", commentUrl="
 					+ commentUrl + ", hasVideo=" + hasVideo + ", destUrl=" + destUrl + ", type="
-					+ type + ", ymz_id=" + ymz_id + ", comment_id=" + comment_id + "]";
+					+ type + ", ymz_id=" + ymz_id + ", comment_id=" + comment_id + ", subjectId="
+					+ subjectId + ", isSubjectEntrance=" + isSubjectEntrance + "]";
 	}
 
 }

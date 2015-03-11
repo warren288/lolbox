@@ -177,13 +177,17 @@ public class HeroDetailActivity extends BaseActivity {
 		mRlStoryViewMore = (RelativeLayout) findViewById(R.id.rl_viewmorestory);
 		mTvExpandStory = (TextView) findViewById(R.id.tv_viewmorestory);
 
-		mTb.setLeftClick(new OnClickListener() {
+		
+		mTb.setRightOperListener(new IListener<String>() {
 
 			@Override
-			public void onClick(View v) {
-				finish();
+			public void onCall(String t) {
+				if("出装".equals(t)){
+					BaseKitManager.openHeroZbTatic(HeroDetailActivity.this, mStrHeroEnName);
+				}
 			}
 		});
+		
 
 	}
 
