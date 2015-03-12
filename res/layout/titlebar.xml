@@ -13,10 +13,10 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:background="@drawable/bg_btn_title"
-        android:paddingBottom="10dp"
+        android:paddingBottom="13dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="13dp"
         android:src="@drawable/lolbox_titleview_return_default" />
 
     <TextView
@@ -36,10 +36,10 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/bg_btn_title"
-        android:paddingBottom="10dp"
+        android:paddingBottom="13dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="13dp" />
 
     <LinearLayout
         android:id="@+id/ll_opers"

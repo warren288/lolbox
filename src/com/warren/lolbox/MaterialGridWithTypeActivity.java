@@ -117,58 +117,30 @@ public class MaterialGridWithTypeActivity extends BaseActivity {
 		mGv.setAdapter(mAdapter);
 
 		// 请求服务器，查询某一类型的物品列表
-		AppContext.getApp().getNetManager()
-					.get(URLUtil.getURL_ZBLst(mEnumType), new IListener<String>() {
+		httpGetAndParseList(URLUtil.getURL_ZBLst(mEnumType), SystemConfig.getIntance()
+					.getCommHead(), MaterialSimple.class, new IListener<List<MaterialSimple>>() {
 
-						@Override
-						public void onCall(String t) {
+			@Override
+			public void onCall(List<MaterialSimple> lstMs) {
 
-							if (t == null) {
-								Toast.makeText(MaterialGridWithTypeActivity.this, "没有符合条件的物品",
-											Toast.LENGTH_SHORT).show();
-								return;
-							}
+				if (lstMs == null || lstMs.size() == 0) {
+					Toast.makeText(MaterialGridWithTypeActivity.this, "没有符合条件的物品",
+								Toast.LENGTH_SHORT).show();
+					return;
+				}
+				mLstMs = lstMs;
+				// 依据物品id，构造物品的图片地址，在Adapter中将根据该地址获取对应的图片
+				mLstSnt = new ArrayList<SimpleNetTool>();
+				for (MaterialSimple ms : lstMs) {
+					SimpleNetTool snt = new SimpleNetTool(URLUtil.getURL_ZBImg(ms.getId(),
+								EnumDPI.DPI64x64), ms.getText());
+					mLstSnt.add(snt);
+				}
+				mAdapter.setLstNetTools(mLstSnt, AppContext.getApp().getImgLoader(), mDisPlayOption);
+				mAdapter.notifyDataSetChanged();
+			}
 
-							// 获得物品列表Json后，转换为所需要的对象列表
-							AppContext.getApp()
-										.getJsonManager()
-										.parseList(t, MaterialSimple.class,
-													new IListener<List<MaterialSimple>>() {
-
-														@Override
-														public void onCall(
-																	List<MaterialSimple> lstMs) {
-
-															if (lstMs == null || lstMs.size() == 0) {
-																Toast.makeText(
-																			MaterialGridWithTypeActivity.this,
-																			"没有符合条件的物品",
-																			Toast.LENGTH_SHORT)
-																			.show();
-																return;
-															}
-															mLstMs = lstMs;
-															// 依据物品id，构造物品的图片地址，在Adapter中将根据该地址获取对应的图片
-															mLstSnt = new ArrayList<SimpleNetTool>();
-															for (MaterialSimple ms : lstMs) {
-																SimpleNetTool snt = new SimpleNetTool(
-																			URLUtil.getURL_ZBImg(
-																						ms.getId(),
-																						EnumDPI.DPI64x64),
-																			ms.getText());
-																mLstSnt.add(snt);
-															}
-															mAdapter.setLstNetTools(
-																		mLstSnt,
-																		AppContext.getApp()
-																					.getImgLoader(),
-																		mDisPlayOption);
-															mAdapter.notifyDataSetChanged();
-														}
-
-													});
-						}
-					});
+		});
 
 		mGv.setOnItemClickListener(new OnItemClickListener() {
 

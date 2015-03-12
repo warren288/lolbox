@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.warren.lolbox.model.IListener;
 import com.warren.lolbox.model.bean.SummonerAbility;
 import com.warren.lolbox.url.URLUtil;
-import com.warren.lolbox.util.StringUtils;
 
 /**
  * 召唤师技能Activity
@@ -27,46 +26,24 @@ public class SummonerAbilityActivity extends BaseActivity {
 
 	private void initCtrl() {
 
-		AppContext.getApp().getNetManager()
-					.get(URLUtil.getURL_SummonerSkill(), new IListener<String>() {
+		httpGetAndParseList(URLUtil.getURL_SummonerSkill(),
+					SystemConfig.getIntance().getCommHead(), SummonerAbility.class,
+					new IListener<List<SummonerAbility>>() {
 
 						@Override
-						public void onCall(String strJson) {
-
-							if (StringUtils.isNullOrZero(strJson)) {
+						public void onCall(List<SummonerAbility> lst) {
+							if (lst == null || lst.size() == 0) {
 								Toast.makeText(SummonerAbilityActivity.this, "请求数据失败",
 											Toast.LENGTH_SHORT).show();
 								return;
 							}
+							BaseGridFragment frag = new BaseGridFragment();
+							frag.setLstSumAbility(lst);
 
-							AppContext.getApp()
-										.getJsonManager()
-										.parseList(strJson, SummonerAbility.class,
-													new IListener<List<SummonerAbility>>() {
-
-														@Override
-														public void onCall(List<SummonerAbility> lst) {
-															if (lst == null || lst.size() == 0) {
-																Toast.makeText(
-																			SummonerAbilityActivity.this,
-																			"请求数据失败",
-																			Toast.LENGTH_SHORT)
-																			.show();
-																return;
-															}
-															BaseGridFragment frag = new BaseGridFragment();
-															frag.setLstSumAbility(lst);
-
-															getFragmentManager()
-																		.beginTransaction()
-																		.add(R.id.ll_root, frag,
-																					frag.getName())
-																		.commit();
-														}
-
-													});
-
+							getFragmentManager().beginTransaction()
+										.add(R.id.ll_root, frag, frag.getName()).commit();
 						}
+
 					});
 
 	}

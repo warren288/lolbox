@@ -22,7 +22,6 @@ import com.warren.lolbox.model.bean.BestGroup;
 import com.warren.lolbox.url.DuowanConfig.EnumDPI;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.LogTool;
-import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
@@ -72,7 +71,8 @@ public class BestGroupActivity extends BaseActivity {
 				Intent it = new Intent(BestGroupActivity.this, BestGroupDetailActivity.class);
 				it.putExtra(BestGroupDetailActivity.EXTRA_BESTGROUP, mLstBg.get(position));
 				startActivity(it);
-				overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+				overridePendingTransition(android.R.anim.slide_in_left,
+							android.R.anim.slide_out_right);
 			}
 		});
 	}
@@ -82,40 +82,21 @@ public class BestGroupActivity extends BaseActivity {
 	 */
 	private void requestData() {
 
-		AppContext.getApp().getNetManager()
-					.get(URLUtil.getURL_BestGroup(), new IListener<String>() {
+		httpGetAndParseList(URLUtil.getURL_BestGroup(), SystemConfig.getIntance().getCommHead(),
+					BestGroup.class, new IListener<List<BestGroup>>() {
 
 						@Override
-						public void onCall(String strJson) {
+						public void onCall(List<BestGroup> t) {
 
-							if (StringUtils.isNullOrZero(strJson)) {
-								Toast.makeText(BestGroupActivity.this, "请求服务器数据失败",
+							if (t == null || t.size() == 0) {
+								Toast.makeText(BestGroupActivity.this, "请求数据失败",
 											Toast.LENGTH_SHORT).show();
 								return;
 							}
-							AppContext.getApp()
-										.getJsonManager()
-										.parseList(strJson, BestGroup.class,
-													new IListener<List<BestGroup>>() {
 
-														@Override
-														public void onCall(List<BestGroup> t) {
-
-															if (t == null || t.size() == 0) {
-																Toast.makeText(
-																			BestGroupActivity.this,
-																			"请求服务器数据失败",
-																			Toast.LENGTH_SHORT)
-																			.show();
-																return;
-															}
-
-															mLstBg = t;
-															AdapterGroups adapter = new AdapterGroups(
-																		getLayoutInflater(), mLstBg);
-															mLv.setAdapter(adapter);
-														}
-													});
+							mLstBg = t;
+							AdapterGroups adapter = new AdapterGroups(getLayoutInflater(), mLstBg);
+							mLv.setAdapter(adapter);
 						}
 					});
 	}
@@ -156,8 +137,9 @@ public class BestGroupActivity extends BaseActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			ViewHolder holder = null;
-			if(convertView == null){
-				convertView = mInflater.inflate(R.layout.activity_bestgroup_listitem, parent, false);
+			if (convertView == null) {
+				convertView = mInflater
+							.inflate(R.layout.activity_bestgroup_listitem, parent, false);
 				holder = new ViewHolder();
 				holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
 				holder.img1 = (ImageView) convertView.findViewById(R.id.img_1);
@@ -168,18 +150,23 @@ public class BestGroupActivity extends BaseActivity {
 				holder.tvDes = (TextView) convertView.findViewById(R.id.tv_des);
 				convertView.setTag(holder);
 			} else {
-				holder = (ViewHolder)convertView.getTag();
+				holder = (ViewHolder) convertView.getTag();
 			}
 			BestGroup bg = mLstData.get(position);
 			holder.tvTitle.setText(bg.getTitle());
 			holder.tvDes.setText(bg.getDes());
-			
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero1(), EnumDPI.DPI120x120), holder.img1);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero2(), EnumDPI.DPI120x120), holder.img2);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero3(), EnumDPI.DPI120x120), holder.img3);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero4(), EnumDPI.DPI120x120), holder.img4);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero5(), EnumDPI.DPI120x120), holder.img5);
-			
+
+			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero1(), EnumDPI.DPI120x120),
+						holder.img1);
+			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero2(), EnumDPI.DPI120x120),
+						holder.img2);
+			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero3(), EnumDPI.DPI120x120),
+						holder.img3);
+			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero4(), EnumDPI.DPI120x120),
+						holder.img4);
+			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero5(), EnumDPI.DPI120x120),
+						holder.img5);
+
 			return convertView;
 		}
 

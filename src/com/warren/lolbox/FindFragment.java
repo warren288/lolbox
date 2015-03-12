@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.SimpleTool;
 import com.warren.lolbox.widget.TitleBar;
 
@@ -22,7 +21,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2014年12月28日
  */
-public class FindFragment extends BaseContentFragment {
+public class FindFragment extends BaseFragment {
 
 	public static final String FRAGMENTNAME = "FindFragment";
 	private View mVRoot;

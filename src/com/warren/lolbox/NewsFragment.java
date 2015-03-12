@@ -15,11 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.IListener;
 import com.warren.lolbox.model.bean.NewsTitle;
 import com.warren.lolbox.url.URLUtil;
-import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.ViewPagerIndicator;
 
 /**
@@ -27,21 +25,28 @@ import com.warren.lolbox.widget.ViewPagerIndicator;
  * @author warren
  * @date 2014年12月28日
  */
-public class NewsFragment extends BaseContentFragment {
+public class NewsFragment extends BaseFragment {
 
 	public static final String FRAGMENTNAME = "NewsFragment";
 	private View mVRoot;
 	private ViewPagerIndicator mIndicator;
 	private ViewPager mPager;
 
-	private static final String[] ARRAY_TITLE = new String[] { "头条", "视频", "赛事"/*, "靓照", "囧图", "壁纸" */};
+	private static final String[] ARRAY_TITLE = new String[] { "头条", "视频", "赛事"/*
+																				 * ,
+																				 * "靓照"
+																				 * ,
+																				 * "囧图"
+																				 * ,
+																				 * "壁纸"
+																				 */};
 	private static final String[] ARRAY_TITLE_REQUEST = new String[] { "头条", "视频", "赛事", "靓照",
 			"囧图", "壁纸" };
 
 	private List<NewsTitle> mLstTitles = new ArrayList<NewsTitle>();
 
 	private AdapterViewPager mAdapter;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,46 +61,26 @@ public class NewsFragment extends BaseContentFragment {
 		mPager = (ViewPager) getRootView().findViewById(R.id.vp);
 
 		mIndicator.setTabItemTitles(Arrays.asList(ARRAY_TITLE));
-		
+
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Dw-Guid", "0A1520BAA4D48A54755261EA62EA7212");
 		// map.put("Dw-Ua", "lolbox&2.0.9d-209&adr&xiaomi");
 		map.put("Dw-Ua", "");
-		
-		AppContext.getApp().getNetManager()
-					.get(URLUtil.getURL_InfoTitle(), map, new IListener<String>() {
+
+		httpGetAndParseList(URLUtil.getURL_InfoTitle(), SystemConfig.getIntance().getCommHead(),
+					NewsTitle.class, new IListener<List<NewsTitle>>() {
 
 						@Override
-						public void onCall(String strJson) {
-							if (StringUtils.isNullOrZero(strJson)) {
+						public void onCall(List<NewsTitle> lstNewsTitle) {
+							if (lstNewsTitle == null || lstNewsTitle.size() == 0) {
 								Toast.makeText(getRootView().getContext(), "请求标题错误",
 											Toast.LENGTH_SHORT).show();
 								return;
 							}
-							AppContext.getApp()
-										.getJsonManager()
-										.parseList(strJson, NewsTitle.class,
-													new IListener<List<NewsTitle>>() {
+							mLstTitles = lstNewsTitle;
 
-														@Override
-														public void onCall(
-																	List<NewsTitle> lstNewsTitle) {
-															if (lstNewsTitle == null
-																		|| lstNewsTitle.size() == 0) {
-																Toast.makeText(
-																			getRootView()
-																						.getContext(),
-																			"请求标题错误",
-																			Toast.LENGTH_SHORT)
-																			.show();
-																return;
-															}
-															mLstTitles = lstNewsTitle;
-															
-															mAdapter = new AdapterViewPager();
-															mPager.setAdapter(mAdapter);
-														}
-													});
+							mAdapter = new AdapterViewPager();
+							mPager.setAdapter(mAdapter);
 						}
 					});
 

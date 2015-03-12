@@ -83,45 +83,21 @@ public class HeroTaticActivity extends BaseActivity {
 
 	private void requestData() {
 
-		AppContext.getApp()
-					.getNetManager()
-					.get(URLUtil.getURL_HeroCz(mStrHeroName, DEFAULT_LIMIT),
-								new IListener<String>() {
+		httpGetAndParseList(URLUtil.getURL_HeroCz(mStrHeroName, DEFAULT_LIMIT), SystemConfig
+					.getIntance().getCommHead(), HeroZbTatic.class,
+					new IListener<List<HeroZbTatic>>() {
 
-									@Override
-									public void onCall(String t) {
-
-										if (t == null || t.length() == 0) {
-											Toast.makeText(HeroTaticActivity.this, "没有请求到数据",
-														Toast.LENGTH_SHORT).show();
-											return;
-										}
-
-										AppContext.getApp()
-													.getJsonManager()
-													.parseList(t, HeroZbTatic.class,
-																new IListener<List<HeroZbTatic>>() {
-
-																	@Override
-																	public void onCall(
-																				List<HeroZbTatic> t) {
-																		if (t == null
-																					|| t.size() == 0) {
-																			Toast.makeText(
-																						HeroTaticActivity.this,
-																						"没有请求到数据",
-																						Toast.LENGTH_SHORT)
-																						.show();
-																			return;
-																		}
-																		mLstTatic = t;
-																		setView(0);
-																	}
-																});
-
-									}
-								});
-
+						@Override
+						public void onCall(List<HeroZbTatic> t) {
+							if (t == null || t.size() == 0) {
+								Toast.makeText(HeroTaticActivity.this, "没有请求到数据",
+											Toast.LENGTH_SHORT).show();
+								return;
+							}
+							mLstTatic = t;
+							setView(0);
+						}
+					});
 	}
 
 	private void setView(int index) {

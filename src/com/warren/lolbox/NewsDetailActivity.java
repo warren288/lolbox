@@ -1,8 +1,5 @@
 package com.warren.lolbox;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -38,37 +35,20 @@ public class NewsDetailActivity extends BaseActivity {
 	private void requestData() {
 
 		String strUrl = URLUtil.getURL_HotNewsDetail(strNewsId);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("Dw-Guid", "0A1520BAA4D48A54755261EA62EA7212");
-		// map.put("Dw-Ua", "lolbox&2.0.9d-209&adr&xiaomi");
-		map.put("Dw-Ua", "");
-		AppContext.getApp().getNetManager().get(strUrl, map, new IListener<String>() {
+		httpGetAndParse(strUrl, SystemConfig.getIntance().getCommHead(), NewsDetail.class,
+					new IListener<NewsDetail>() {
 
-			@Override
-			public void onCall(String t) {
-				if (StringUtils.isNullOrZero(t)) {
-					Toast.makeText(NewsDetailActivity.this, "请求数据失败", Toast.LENGTH_SHORT).show();
-					return;
-				}
-
-				AppContext.getApp().getJsonManager()
-							.parse(t, NewsDetail.class, new IListener<NewsDetail>() {
-
-								@Override
-								public void onCall(NewsDetail detail) {
-									if (detail == null) {
-										Toast.makeText(NewsDetailActivity.this, "转换新闻数据失败",
-													Toast.LENGTH_SHORT).show();
-										return;
-									}
-									String strHtml = (String) detail.getData().get("content");
-									wvDetail.loadDataWithBaseURL(null, strHtml, "text/html",
-												"utf-8", null);
-								}
-							});
-
-			}
-		});
+						@Override
+						public void onCall(NewsDetail detail) {
+							if (detail == null) {
+								Toast.makeText(NewsDetailActivity.this, "转换新闻数据失败",
+											Toast.LENGTH_SHORT).show();
+								return;
+							}
+							String strHtml = (String) detail.getData().get("content");
+							wvDetail.loadDataWithBaseURL(null, strHtml, "text/html", "utf-8", null);
+						}
+					});
 	}
 
 	@Override

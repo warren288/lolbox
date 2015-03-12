@@ -20,7 +20,6 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.LoadedFrom;
 import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
-import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.SimpleNetTool;
 import com.warren.lolbox.model.bean.HeroSimple;
 import com.warren.lolbox.model.bean.MaterialSimple;
@@ -33,7 +32,7 @@ import com.warren.lolbox.url.URLUtil;
  * @author warren
  * @date 2015年1月1日
  */
-public class BaseGridFragment extends BaseContentFragment {
+public class BaseGridFragment extends BaseFragment {
 
 	public static final String FRAGMENTNAME = "BaseGridFragment";
 	public static final String EXTRA_JSON = "EXTRA_JSON";

@@ -1,6 +1,5 @@
 package com.warren.lolbox;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.warren.lolbox.model.IBaseFragment;
 import com.warren.lolbox.model.IListener;
 
 /**
@@ -18,7 +16,7 @@ import com.warren.lolbox.model.IListener;
  * @author warren
  * @date 2014年12月28日
  */
-public class FootFragment extends Fragment implements IBaseFragment {
+public class FootFragment extends BaseFragment {
 
 	private static String LOGTAG = "MainFootFragment";
 

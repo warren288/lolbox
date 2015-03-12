@@ -6,14 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.warren.lolbox.model.BaseContentFragment;
-
 /**
  * 聊一聊Fragment
  * @author warren
  * @date 2014年12月28日
  */
-public class ChatFragment extends BaseContentFragment{
+public class ChatFragment extends BaseFragment{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

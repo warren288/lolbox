@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.SimpleTool;
 import com.warren.lolbox.widget.MessageDialog;
 import com.warren.lolbox.widget.TitleBar;
@@ -30,7 +29,7 @@ import com.warren.lolbox.widget.TitleBar;
  * @author warren
  * @date 2014年12月28日
  */
-public class ToolFragment extends BaseContentFragment {
+public class ToolFragment extends BaseFragment {
 
 	private static String LOGTAG = "ToolFragment";
 

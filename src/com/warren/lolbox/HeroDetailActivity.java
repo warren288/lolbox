@@ -177,17 +177,15 @@ public class HeroDetailActivity extends BaseActivity {
 		mRlStoryViewMore = (RelativeLayout) findViewById(R.id.rl_viewmorestory);
 		mTvExpandStory = (TextView) findViewById(R.id.tv_viewmorestory);
 
-		
 		mTb.setRightOperListener(new IListener<String>() {
 
 			@Override
 			public void onCall(String t) {
-				if("出装".equals(t)){
+				if ("出装".equals(t)) {
 					BaseKitManager.openHeroZbTatic(HeroDetailActivity.this, mStrHeroEnName);
 				}
 			}
 		});
-		
 
 	}
 
@@ -214,8 +212,8 @@ public class HeroDetailActivity extends BaseActivity {
 	 */
 	private void requestData() {
 
-		AppContext.getApp().getNetManager()
-					.get(URLUtil.getURL_HeroDetail(mStrHeroEnName), new IListener<String>() {
+		httpGet(URLUtil.getURL_HeroDetail(mStrHeroEnName), SystemConfig.getIntance().getCommHead(),
+					new IListener<String>() {
 
 						@Override
 						public void onCall(String t) {
@@ -228,15 +226,14 @@ public class HeroDetailActivity extends BaseActivity {
 
 							t = checkData(t);
 
-							AppContext.getApp().getJsonManager()
-										.parse(t, Hero.class, new IListener<Hero>() {
+							jsonParse(t, Hero.class, new IListener<Hero>() {
 
-											@Override
-											public void onCall(Hero t) {
-												mHero = t;
-												setView();
-											}
-										});
+								@Override
+								public void onCall(Hero t) {
+									mHero = t;
+									setView();
+								}
+							});
 
 						}
 					});

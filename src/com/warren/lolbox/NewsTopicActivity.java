@@ -2,9 +2,7 @@ package com.warren.lolbox;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +26,6 @@ import com.warren.lolbox.model.bean.NewsInfo;
 import com.warren.lolbox.model.bean.NewsTopic;
 import com.warren.lolbox.model.bean.NewsTopicRoot;
 import com.warren.lolbox.url.URLUtil;
-import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
@@ -110,46 +107,20 @@ public class NewsTopicActivity extends BaseActivity {
 
 	private void requestData() {
 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("Dw-Guid", "0A1520BAA4D48A54755261EA62EA7212");
-		// map.put("Dw-Ua", "lolbox&2.0.9d-209&adr&xiaomi");
-		map.put("Dw-Ua", "");
+		httpGetAndParse(URLUtil.getURL_NewsTopic(mStrTopicId), SystemConfig.getIntance()
+					.getCommHead(), NewsTopicRoot.class, new IListener<NewsTopicRoot>() {
 
-		AppContext.getApp().getNetManager()
-					.get(URLUtil.getURL_NewsTopic(mStrTopicId), map, new IListener<String>() {
-
-						@Override
-						public void onCall(String strTopicJson) {
-							if (StringUtils.isNullOrZero(strTopicJson)) {
-								Toast.makeText(NewsTopicActivity.this, "请求数据失败", Toast.LENGTH_SHORT)
-											.show();
-								return;
-							}
-
-							AppContext.getApp()
-										.getJsonManager()
-										.parse(strTopicJson, NewsTopicRoot.class,
-													new IListener<NewsTopicRoot>() {
-
-														@Override
-														public void onCall(NewsTopicRoot ntr) {
-															if (ntr == null) {
-																Toast.makeText(
-																			NewsTopicActivity.this,
-																			"请求数据失败",
-																			Toast.LENGTH_SHORT)
-																			.show();
-																return;
-															}
-															NewsTopic topic = ntr.getData().get(0)
-																		.getData();
-															mPtrlv.onRefreshComplete();
-															setView(topic);
-														}
-													});
-						}
-
-					});
+			@Override
+			public void onCall(NewsTopicRoot ntr) {
+				if (ntr == null) {
+					Toast.makeText(NewsTopicActivity.this, "请求数据失败", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				NewsTopic topic = ntr.getData().get(0).getData();
+				mPtrlv.onRefreshComplete();
+				setView(topic);
+			}
+		});
 	}
 
 	private void setView(NewsTopic topic) {

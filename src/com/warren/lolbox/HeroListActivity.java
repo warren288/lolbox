@@ -30,13 +30,13 @@ public class HeroListActivity extends BaseActivity {
 	private ViewPagerIndicator mVpIndicator;
 	private ViewPager mVp;
 	private FragmentPagerAdapter mAdapter;
-	
+
 	private List<HeroSimple> mLstHeroFree;
 	private List<HeroSimple> mLstHeroLike;
 	private List<HeroSimple> mLstHeroAll;
-	
+
 	private boolean[] mArrFinish = new boolean[3];
-	
+
 	private List<String> mLstTitles = Arrays.asList("免费", "收藏", "全部");
 
 	@Override
@@ -44,105 +44,95 @@ public class HeroListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_herolist);
-		
+
 		initCtrl();
 	}
 
 	private void initCtrl() {
-		
+
 		mTb = (TitleBar) findViewById(R.id.titlebar);
 		mTb.setRightVisibility(View.GONE);
 		mVpIndicator = (ViewPagerIndicator) findViewById(R.id.vpindicator);
 		mVp = (ViewPager) findViewById(R.id.vp);
-		
-		AppNetManager anm = AppContext.getApp().getNetManager();
-		anm.get(URLUtil.getURL_HeroList("free"), new IListener<String>() {
-			
-			@Override
-			public void onCall(String strJson) {
-				AppContext.getApp().getJsonManager().parse(strJson, FreeHeroList.class, new IListener<FreeHeroList>() {
 
-					@Override
-					public void onCall(FreeHeroList t) {
-						
-						mArrFinish[0] = true;
-						if (t != null) {
-							mLstHeroFree = t.getFree();
+		httpGetAndParse(URLUtil.getURL_HeroList("free"), SystemConfig.getIntance().getCommHead(),
+					FreeHeroList.class, new IListener<FreeHeroList>() {
+
+						@Override
+						public void onCall(FreeHeroList t) {
+
+							mArrFinish[0] = true;
+							if (t != null) {
+								mLstHeroFree = t.getFree();
+							}
+							checkStartInitFrags();
 						}
-						checkStartInitFrags();
-					}
-				});
-			}
-		});
-		
+					});
+
 		mArrFinish[1] = true;
-		
-//		anm.get(URLUtil.getURL_HeroList("like"), new IListener<String>() {
-//			
-//			@Override
-//			public void onCall(String strJson) {
-//				AppContext.getApp().getJsonManager().parse(strJson, FreeHeroList.class, new IListener<FreeHeroList>() {
-//
-//					@Override
-//					public void onCall(FreeHeroList t) {
-//						
-//						mArrFinish[1] = true;
-//						
-//						if (t == null) {
-//							return;
-//						}
-//						mLstHeroLike = t.getFree();
-//						checkStartInitFrags();
-//					}
-//				});
-//			}
-//		});
-		
-		anm.get(URLUtil.getURL_HeroList("all"), new IListener<String>() {
-			
-			@Override
-			public void onCall(String strJson) {
-				AppContext.getApp().getJsonManager().parse(strJson, AllHeroList.class, new IListener<AllHeroList>() {
 
-					@Override
-					public void onCall(AllHeroList t) {
-						
-						mArrFinish[2] = true;
-						if (t != null) {
-							mLstHeroAll = t.getAll();
+		// anm.get(URLUtil.getURL_HeroList("like"), new IListener<String>() {
+		//
+		// @Override
+		// public void onCall(String strJson) {
+		// AppContext.getApp().getJsonManager().parse(strJson,
+		// FreeHeroList.class, new IListener<FreeHeroList>() {
+		//
+		// @Override
+		// public void onCall(FreeHeroList t) {
+		//
+		// mArrFinish[1] = true;
+		//
+		// if (t == null) {
+		// return;
+		// }
+		// mLstHeroLike = t.getFree();
+		// checkStartInitFrags();
+		// }
+		// });
+		// }
+		// });
+
+		httpGetAndParse(URLUtil.getURL_HeroList("all"), SystemConfig.getIntance().getCommHead(),
+					AllHeroList.class, new IListener<AllHeroList>() {
+
+						@Override
+						public void onCall(AllHeroList t) {
+
+							mArrFinish[2] = true;
+							if (t != null) {
+								mLstHeroAll = t.getAll();
+							}
+							checkStartInitFrags();
 						}
-						checkStartInitFrags();
-					}
-				});
-			}
-		});
-		
+					});
+
 		mTb.setLeftClick(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
 	}
-	
+
 	/**
 	 * 检查三个List都获取完毕后，更新页面，加载Fragment
 	 */
-	private void checkStartInitFrags(){
-		
-		if(mArrFinish[0] && mArrFinish[1] && mArrFinish[2]){
-			
-			if(mLstHeroFree == null){
+	private void checkStartInitFrags() {
+
+		if (mArrFinish[0] && mArrFinish[1] && mArrFinish[2]) {
+
+			if (mLstHeroFree == null) {
 				mLstHeroFree = new ArrayList<HeroSimple>();
 			}
-			if(mLstHeroLike == null){
+			if (mLstHeroLike == null) {
 				mLstHeroLike = new ArrayList<HeroSimple>();
 			}
-			if(mLstHeroAll == null){
+			if (mLstHeroAll == null) {
 				mLstHeroAll = new ArrayList<HeroSimple>();
 			}
-			
+
 			final BaseGridFragment[] frags = new BaseGridFragment[3];
 			frags[0] = new BaseGridFragment();
 			frags[0].setLstHero(mLstHeroFree);
@@ -150,25 +140,24 @@ public class HeroListActivity extends BaseActivity {
 			frags[1].setLstHero(mLstHeroLike);
 			frags[2] = new BaseGridFragment();
 			frags[2].setLstHero(mLstHeroAll);
-			
-			
+
 			mAdapter = new FragmentPagerAdapter(getFragmentManager()) {
-				
+
 				@Override
 				public int getCount() {
 					return 3;
 				}
-				
+
 				@Override
 				public Fragment getItem(int position) {
 					return frags[position];
 				}
 			};
-			
+
 			mVp.setAdapter(mAdapter);
 			mVpIndicator.setTabItemTitles(mLstTitles);
 			mVpIndicator.setViewPager(mVp, 0);
-			
+
 		}
 	}
 
@@ -176,5 +165,5 @@ public class HeroListActivity extends BaseActivity {
 	protected boolean goBack() {
 		return false;
 	}
-	
+
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
-import com.warren.lolbox.model.BaseContentFragment;
 import com.warren.lolbox.model.IListener;
 import com.warren.lolbox.model.MultiOper;
 
@@ -22,7 +21,7 @@ public class MainActivity extends BaseActivity {
 	 * 用于各功能Fragment切换的监听器
 	 */
 	private IListener<Integer> mListener;
-	private BaseContentFragment[] mFragContents = new BaseContentFragment[5];
+	private BaseFragment[] mFragContents = new BaseFragment[5];
 	private int mCurrentFragIndex = 0;
 	
 	private MultiOper mBackOper;

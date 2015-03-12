@@ -71,38 +71,32 @@ public class MaterialDetailActivity extends BaseActivity {
 		}
 
 		// 请求服务器获取物品详情Json
-		AppContext.getApp()
-					.getNetManager()
-					.get(URLUtil.getURL_ZBDetail(Integer.parseInt(mStrMaterialId)),
-								new IListener<String>() {
+		httpGet(URLUtil.getURL_ZBDetail(Integer.parseInt(mStrMaterialId)), SystemConfig
+					.getIntance().getCommHead(), new IListener<String>() {
 
-									@Override
-									public void onCall(String strJson) {
+			@Override
+			public void onCall(String strJson) {
 
-										strJson = checkMaterialJson(strJson);
+				strJson = checkMaterialJson(strJson);
 
-										// 获取到Json后解析成 Material实体
-										AppContext.getApp()
-													.getJsonManager()
-													.parse(strJson, Material.class,
-																new IListener<Material>() {
+				// 获取到Json后解析成 Material实体
+				jsonParse(strJson, Material.class, new IListener<Material>() {
 
-																	@Override
-																	public void onCall(
-																				Material material) {
+					@Override
+					public void onCall(Material material) {
 
-																		if (material == null) {
-																			setNullHint();
-																			return;
-																		}
-																		mMaterial = material;
-																		setView();
-																	}
+						if (material == null) {
+							setNullHint();
+							return;
+						}
+						mMaterial = material;
+						setView();
+					}
 
-																});
+				});
 
-									}
-								});
+			}
+		});
 
 	}
 
