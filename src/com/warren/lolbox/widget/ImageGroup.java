@@ -3,9 +3,9 @@ package com.warren.lolbox.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,8 +22,12 @@ public class ImageGroup extends LinearLayout {
 	private static final int DEFAULT_HEIGHT = 30;
 	private static final int DEFAULT_COUNT = 0;
 
-	private ImageView[] mArrImg;
+	private StatefulImageView[] mArrImg;
 	private int mImgCount;
+	private int mImgUsefulCount;
+	private boolean mStateEnable = false;
+	private Drawable mDrawableForeground;
+	
 	private LayoutParams mImgParam;
 
 	private IListener<Integer> mClickListener;
@@ -46,19 +50,26 @@ public class ImageGroup extends LinearLayout {
 
 		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ImageGroup);
 		mImgCount = a.getInteger(R.styleable.ImageGroup_img_count, DEFAULT_COUNT);
+		mStateEnable = a.getBoolean(R.styleable.ImageGroup_img_state_enable, false);
+		mDrawableForeground = a.getDrawable(R.styleable.ImageGroup_img_state_foreground);
+		a.recycle();
+		
 		mImgParam = new LayoutParams(a.getDimensionPixelSize(R.styleable.ImageGroup_img_height,
 					DEFAULT_HEIGHT), a.getDimensionPixelSize(R.styleable.ImageGroup_img_height,
 					DEFAULT_HEIGHT));
-		a.recycle();
 
 		setOrientation(LinearLayout.HORIZONTAL);
 		setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
-		mArrImg = new ImageView[mImgCount];
+		mArrImg = new StatefulImageView[mImgCount];
 		for (int i = 0; i < mImgCount; i++) {
-			mArrImg[i] = new ImageView(getContext());
+			mArrImg[i] = new StatefulImageView(getContext());
 			mArrImg[i].setLayoutParams(mImgParam);
 			mArrImg[i].setPadding(2, 2, 2, 2);
+			mArrImg[i].setStateEnable(mStateEnable);
+			if(mDrawableForeground != null){
+				mArrImg[i].setForegroundDrawable(mDrawableForeground);
+			}
 			addView(mArrImg[i]);
 			final int j = i;
 			mArrImg[i].setOnClickListener(new View.OnClickListener() {
@@ -73,19 +84,44 @@ public class ImageGroup extends LinearLayout {
 		}
 	}
 
+	/**
+	 * 设置图片点击事件
+	 * @param listener 回调方法中的参数是对应ImageView在该视图中的序号
+	 */
 	public void setOnClickListener(IListener<Integer> listener) {
 		this.mClickListener = listener;
 	}
 
+	/**
+	 * 显示图片
+	 * @param imgLoader
+	 * @param arrImgUrl	图片Url列表
+	 */
 	public void displayImage(ImageLoader imgLoader, String[] arrImgUrl) {
 
 		int countUrl = arrImgUrl.length;
-		int countUseful = countUrl > mImgCount ? mImgCount : countUrl;
-
-		for (int i = 0; i < countUseful; i++) {
-			imgLoader.displayImage(arrImgUrl[i], mArrImg[i]);
+		mImgUsefulCount = countUrl > mImgCount ? mImgCount : countUrl;
+		for (int i = 0; i < mImgUsefulCount; i++) {
+			mArrImg[i].displayImage(imgLoader, arrImgUrl[i]);
+		}
+		for(int i = mImgUsefulCount; i < mImgCount; i++){
+			mArrImg[i].setVisibility(View.GONE);
 		}
 	}
+	
+	/**
+	 * 设置本视图中各ImageView的状态
+	 * @param arrState
+	 */
+	public void setImageStates(boolean[] arrState){
+		if(arrState == null || arrState.length != mImgUsefulCount){
+			return;
+		}
+		for(int i = 0; i < mImgUsefulCount; i++){
+			mArrImg[i].setShowState(arrState[i]);
+		}
+	}
+	
 
 	@Override
 	protected void onDraw(Canvas canvas) {

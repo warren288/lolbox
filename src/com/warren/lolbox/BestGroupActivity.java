@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +21,7 @@ import com.warren.lolbox.model.bean.BestGroup;
 import com.warren.lolbox.url.DuowanConfig.EnumDPI;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.LogTool;
+import com.warren.lolbox.widget.ImageGroup;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
@@ -89,8 +89,8 @@ public class BestGroupActivity extends BaseActivity {
 						public void onCall(List<BestGroup> t) {
 
 							if (t == null || t.size() == 0) {
-								Toast.makeText(BestGroupActivity.this, "请求数据失败",
-											Toast.LENGTH_SHORT).show();
+								Toast.makeText(BestGroupActivity.this, "请求数据失败", Toast.LENGTH_SHORT)
+											.show();
 								return;
 							}
 
@@ -142,11 +142,7 @@ public class BestGroupActivity extends BaseActivity {
 							.inflate(R.layout.activity_bestgroup_listitem, parent, false);
 				holder = new ViewHolder();
 				holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
-				holder.img1 = (ImageView) convertView.findViewById(R.id.img_1);
-				holder.img2 = (ImageView) convertView.findViewById(R.id.img_2);
-				holder.img3 = (ImageView) convertView.findViewById(R.id.img_3);
-				holder.img4 = (ImageView) convertView.findViewById(R.id.img_4);
-				holder.img5 = (ImageView) convertView.findViewById(R.id.img_5);
+				holder.imggp = (ImageGroup) convertView.findViewById(R.id.imggp_group);
 				holder.tvDes = (TextView) convertView.findViewById(R.id.tv_des);
 				convertView.setTag(holder);
 			} else {
@@ -156,16 +152,13 @@ public class BestGroupActivity extends BaseActivity {
 			holder.tvTitle.setText(bg.getTitle());
 			holder.tvDes.setText(bg.getDes());
 
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero1(), EnumDPI.DPI120x120),
-						holder.img1);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero2(), EnumDPI.DPI120x120),
-						holder.img2);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero3(), EnumDPI.DPI120x120),
-						holder.img3);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero4(), EnumDPI.DPI120x120),
-						holder.img4);
-			mImgLoader.displayImage(URLUtil.getURL_HeroImg(bg.getHero5(), EnumDPI.DPI120x120),
-						holder.img5);
+			holder.imggp.displayImage(
+						mImgLoader,
+						new String[] { URLUtil.getURL_HeroImg(bg.getHero1(), EnumDPI.DPI120x120),
+								URLUtil.getURL_HeroImg(bg.getHero2(), EnumDPI.DPI120x120),
+								URLUtil.getURL_HeroImg(bg.getHero3(), EnumDPI.DPI120x120),
+								URLUtil.getURL_HeroImg(bg.getHero4(), EnumDPI.DPI120x120),
+								URLUtil.getURL_HeroImg(bg.getHero5(), EnumDPI.DPI120x120) });
 
 			return convertView;
 		}
@@ -173,11 +166,7 @@ public class BestGroupActivity extends BaseActivity {
 		class ViewHolder {
 
 			public TextView tvTitle;
-			public ImageView img1;
-			public ImageView img2;
-			public ImageView img3;
-			public ImageView img4;
-			public ImageView img5;
+			public ImageGroup imggp;
 			public TextView tvDes;
 
 		}

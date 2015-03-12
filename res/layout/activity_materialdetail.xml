@@ -34,7 +34,8 @@
                 android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
                 android:paddingRight="5dp"
-                android:src="@drawable/bg_shake" />
+                android:scaleType="fitXY"
+                android:src="@drawable/dl_loading_img" />
 
             <TextView
                 android:id="@+id/tv_materialname"
@@ -43,7 +44,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="2dp"
                 android:layout_toRightOf="@id/img_material"
-                android:text="贪婪之刃"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -54,7 +54,6 @@
                 android:layout_below="@id/tv_materialname"
                 android:layout_marginTop="2dp"
                 android:layout_toRightOf="@id/img_material"
-                android:text="价格1000 总价1000"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -73,7 +72,6 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:padding="5dp"
-            android:text="我是一个好人我是一个好人我是一个好人我是一个好人我是一个好人我是一个好人我是一个好人我是一个好人我是一个好人我是一个好人"
             android:textColor="@android:color/black"
             android:textSize="12sp" />
 

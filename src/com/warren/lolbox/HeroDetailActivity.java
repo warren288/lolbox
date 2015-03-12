@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +21,7 @@ import com.warren.lolbox.url.DuowanConfig.EnumDPI;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.DeviceUtil;
 import com.warren.lolbox.util.StringUtils;
+import com.warren.lolbox.widget.ImageGroup;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
@@ -41,9 +41,7 @@ public class HeroDetailActivity extends BaseActivity {
 	private TextView mTvAtt;
 	private TextView mTvAbilityDescription;
 
-	private FrameLayout[] mArrFlAbility = new FrameLayout[5];
-	private ImageView[] mArrImgAbility = new ImageView[5];
-	private View[] mArrVAbility = new View[5];
+	private ImageGroup mImggpAbility;
 
 	private LinearLayout mLlPartner;
 	private ImageView mImgPartner1;
@@ -118,21 +116,7 @@ public class HeroDetailActivity extends BaseActivity {
 		mTvPrice = (TextView) findViewById(R.id.tv_price);
 		mTvAtt = (TextView) findViewById(R.id.tv_att);
 
-		mArrFlAbility[0] = (FrameLayout) findViewById(R.id.fl_ability_1);
-		mArrImgAbility[0] = (ImageView) findViewById(R.id.img_ability_1);
-		mArrVAbility[0] = findViewById(R.id.v_ability_1);
-		mArrFlAbility[1] = (FrameLayout) findViewById(R.id.fl_ability_2);
-		mArrImgAbility[1] = (ImageView) findViewById(R.id.img_ability_2);
-		mArrVAbility[1] = findViewById(R.id.v_ability_2);
-		mArrFlAbility[2] = (FrameLayout) findViewById(R.id.fl_ability_3);
-		mArrImgAbility[2] = (ImageView) findViewById(R.id.img_ability_3);
-		mArrVAbility[2] = findViewById(R.id.v_ability_3);
-		mArrFlAbility[3] = (FrameLayout) findViewById(R.id.fl_ability_4);
-		mArrImgAbility[3] = (ImageView) findViewById(R.id.img_ability_4);
-		mArrVAbility[3] = findViewById(R.id.v_ability_4);
-		mArrFlAbility[4] = (FrameLayout) findViewById(R.id.fl_ability_5);
-		mArrImgAbility[4] = (ImageView) findViewById(R.id.img_ability_5);
-		mArrVAbility[4] = findViewById(R.id.v_ability_5);
+		mImggpAbility = (ImageGroup) findViewById(R.id.imggp_ability);
 
 		mTvAbilityDescription = (TextView) findViewById(R.id.tv_ability_description);
 
@@ -196,15 +180,13 @@ public class HeroDetailActivity extends BaseActivity {
 	private void selectAbitlity(int index) {
 
 		mTvAbilityDescription.setText(mArrAbilitysDes[index] == null ? "" : mArrAbilitysDes[index]);
+		boolean[] arrState = new boolean[5];
+
 		for (int i = 0; i < 5; i++) {
-
-			if (i == index) {
-				mArrVAbility[i].setVisibility(View.GONE);
-			} else {
-				mArrVAbility[i].setVisibility(View.VISIBLE);
-			}
-
+			arrState[i] = (i != index);
 		}
+
+		mImggpAbility.setImageStates(arrState);
 	}
 
 	/**
@@ -261,23 +243,21 @@ public class HeroDetailActivity extends BaseActivity {
 
 		ImageLoader imgLoader = AppContext.getApp().getImgLoader();
 
-		imgLoader.displayImage(URLUtil.getURL_HeroImg(mStrHeroEnName, EnumDPI.DPI120x120), mImgHero);
+		mImggpAbility.displayImage(
+					imgLoader,
+					new String[] {
+							URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.B,
+										EnumDPI.DPI64x64),
+							URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.Q,
+										EnumDPI.DPI64x64),
+							URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.W,
+										EnumDPI.DPI64x64),
+							URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.E,
+										EnumDPI.DPI64x64),
+							URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.R,
+										EnumDPI.DPI64x64) });
 
-		imgLoader.displayImage(
-					URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.B, EnumDPI.DPI64x64),
-					mArrImgAbility[0]);
-		imgLoader.displayImage(
-					URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.Q, EnumDPI.DPI64x64),
-					mArrImgAbility[1]);
-		imgLoader.displayImage(
-					URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.W, EnumDPI.DPI64x64),
-					mArrImgAbility[2]);
-		imgLoader.displayImage(
-					URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.E, EnumDPI.DPI64x64),
-					mArrImgAbility[3]);
-		imgLoader.displayImage(
-					URLUtil.getURL_HeroAbilityImg(mStrHeroEnName, EnumAbility.R, EnumDPI.DPI64x64),
-					mArrImgAbility[4]);
+		imgLoader.displayImage(URLUtil.getURL_HeroImg(mStrHeroEnName, EnumDPI.DPI120x120), mImgHero);
 
 		// 新英雄可能价格不明确，服务器返回的Json中price字段内容为 ","，需要特殊对待
 		String strPrice = mHero.getPrice() != null && mHero.getPrice().contains(",")
@@ -337,16 +317,13 @@ public class HeroDetailActivity extends BaseActivity {
 
 		selectAbitlity(0);
 
-		for (int i = 0; i < 5; i++) {
-			final int iIn = i;
-			mArrFlAbility[i].setOnClickListener(new OnClickListener() {
+		mImggpAbility.setOnClickListener(new IListener<Integer>() {
 
-				@Override
-				public void onClick(View v) {
-					selectAbitlity(iIn);
-				}
-			});
-		}
+			@Override
+			public void onCall(Integer t) {
+				selectAbitlity(t);
+			}
+		});
 
 		mRlPartnerViewMore.setOnClickListener(new OnClickListener() {
 
@@ -493,9 +470,17 @@ public class HeroDetailActivity extends BaseActivity {
 
 		StringBuilder sbDescription = new StringBuilder();
 		sbDescription.append(ability.getName() + "\n");
-		sbDescription.append("消耗：" + ability.getCost() + "\n");
-		sbDescription.append("冷却：" + ability.getCooldown() + "\n");
-		sbDescription.append("范围：" + ability.getRange() + "\n");
+
+		// 被动技能一般没有 消耗、冷却、范围等信息，不予显示。
+		boolean isB = StringUtils.isNullOrZero(ability.getCost())
+					&& StringUtils.isNullOrZero(ability.getCooldown())
+					&& StringUtils.isNullOrZero(ability.getRange());
+		if (!isB) {
+			sbDescription.append("消耗：" + ability.getCost() + "\n");
+			sbDescription.append("冷却：" + ability.getCooldown() + "\n");
+			sbDescription.append("范围：" + ability.getRange() + "\n");
+		}
+
 		sbDescription.append("效果：" + ability.getDescription());
 
 		return sbDescription.toString();

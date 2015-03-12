@@ -42,7 +42,7 @@
                     android:layout_centerVertical="true"
                     android:paddingRight="5dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/icon" />
+                    android:src="@drawable/dl_loading_img" />
 
                 <TextView
                     android:id="@+id/tv_heroname"
@@ -92,14 +92,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         warren:img_count="6"
-                        warren:img_height="40dp" />
+                        warren:img_height="40dp"
+                        warren:img_state_enable="false" />
 
                     <com.warren.lolbox.widget.ImageGroup
                         android:id="@+id/imggp_qq_zb"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         warren:img_count="6"
-                        warren:img_height="45dp" />
+                        warren:img_height="45dp"
+                        warren:img_state_enable="false" />
 
                     <TextView
                         android:id="@+id/tv_description_qq"

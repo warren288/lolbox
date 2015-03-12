@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.warren.lolbox.R;
 
 /**
- * ViewPager 指示器，源自大神博客 http://blog.csdn.net/lmj623565791/article/details/42160391
+ * ViewPager 指示器
  * @author zhy
  */
 public class ViewPagerIndicator extends LinearLayout {

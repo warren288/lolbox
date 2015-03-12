@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_tool_griditem"
@@ -10,54 +11,25 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="最佳重生阵容"
         android:textColor="@android:color/black"
         android:textSize="14sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="3dp"
-        android:paddingTop="3dp" >
-
-        <ImageView
-            android:id="@+id/img_1"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:paddingRight="2dp" />
-
-        <ImageView
-            android:id="@+id/img_2"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:paddingRight="2dp" />
-
-        <ImageView
-            android:id="@+id/img_3"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:paddingRight="2dp" />
-
-        <ImageView
-            android:id="@+id/img_4"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:paddingRight="2dp" />
-
-        <ImageView
-            android:id="@+id/img_5"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:paddingRight="2dp" />
-    </LinearLayout>
+    <com.warren.lolbox.widget.ImageGroup
+        android:id="@+id/imggp_group"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        warren:img_count="5"
+        warren:img_height="45dp"
+        warren:img_state_enable="false" >
+    </com.warren.lolbox.widget.ImageGroup>
 
     <TextView
         android:id="@+id/tv_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lines="2"
-        android:text="最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容最佳重生阵容"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
 

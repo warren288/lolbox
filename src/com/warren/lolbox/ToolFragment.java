@@ -53,7 +53,7 @@ public class ToolFragment extends BaseFragment {
 
 	private void initTools() {
 
-		SimpleTool stBMYX = new SimpleTool(R.drawable.tool_menu_bmyx, R.string.toolmenu_bmyxtest);
+		SimpleTool stWeather = new SimpleTool(R.drawable.tool_menu_bmyx, R.string.toolmenu_weather);
 		SimpleTool stHero = new SimpleTool(R.drawable.tool_menu_hero, R.string.toolmenu_yx);
 		SimpleTool stVideo = new SimpleTool(R.drawable.tool_menu_video, R.string.toolmenu_video);
 		SimpleTool stShake = new SimpleTool(R.drawable.tool_menu_shake, R.string.toolmenu_shrink);
@@ -69,11 +69,11 @@ public class ToolFragment extends BaseFragment {
 		mTools.add(stHero);
 		mTools.add(stBaike);
 		mTools.add(stNews);
-		mTools.add(stBMYX);
-		mTools.add(stVideo);
+		mTools.add(stWeather);
 		mTools.add(stShake);
-		mTools.add(stLottery);
 		mTools.add(stLiveShow);
+		mTools.add(stVideo);
+		mTools.add(stLottery);
 		mTools.add(stReflectTest);
 	}
 
