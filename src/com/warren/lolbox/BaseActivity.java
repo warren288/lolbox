@@ -171,4 +171,16 @@ public abstract class BaseActivity extends Activity {
 				final IListener<List<T>> listener) {
 		AppContext.getApp().getJsonManager().parseList(strJson, cls, listener);
 	}
+
+	/**
+	 * 异步解析指定Json
+	 * @param strJson
+	 * @param cls
+	 * @param listener
+	 */
+	public <T> void jsonParseMap(final String strJson,
+				final IListener<Map<String, HashMap<String, Object>>> listener) {
+
+		AppContext.getApp().getJsonManager().parseMap(strJson, listener);
+	}
 }

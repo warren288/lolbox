@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
@@ -61,6 +62,57 @@ public class AppJsonParserManager {
 				final IListener<List<T>> listener) {
 
 		new AsyncTaskParserList<T>(cls, listener).execute(strJson);
+	}
+
+	/**
+	 * 异步解析Json为Map，同步回调。解析成功则回调方法中的参数是解析结果，否则是 null。
+	 * @param strJson
+	 * @param listener
+	 */
+	public <T> void parseMap(final String strJson,
+				final IListener<Map<String, HashMap<String, Object>>> listener) {
+		new AsyncTaskParserMap(listener).execute(strJson);
+	}
+
+	/**
+	 * 异步解析列表Json，同步回调
+	 * @author warren
+	 * @date 2014年12月31日
+	 */
+	class AsyncTaskParserMap extends
+				AsyncTask<String, Integer, Map<String, HashMap<String, Object>>> {
+
+		private IListener<Map<String, HashMap<String, Object>>> listener;
+
+		public AsyncTaskParserMap(IListener<Map<String, HashMap<String, Object>>> listener) {
+			this.listener = listener;
+		}
+
+		@Override
+		protected Map<String, HashMap<String, Object>> doInBackground(String... params) {
+
+			StringReader sr = new StringReader(params[0]);
+			Map<String, HashMap<String, Object>> map = null;
+			try {
+				sr.reset();
+				// 解析成List时，无法直接解析成指定类型的列表，所以需要把解析得到的List<HashMap<String,
+				// Object>>每一项单独再转成指定类型的对象。
+				JsonFactory factory = new ObjectMapper().getJsonFactory();
+				JsonParser jpar = factory.createJsonParser(sr);
+				map = jpar.readValueAs(Map.class);
+			} catch (Exception e) {
+				LogTool.exception(e);
+			}
+			sr.close();
+			return map;
+		}
+
+		@Override
+		protected void onPostExecute(Map<String, HashMap<String, Object>> result) {
+			super.onPostExecute(result);
+			listener.onCall(result);
+		}
+
 	}
 
 	/**

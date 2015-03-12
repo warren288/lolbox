@@ -25,12 +25,12 @@ public class FindFragment extends BaseFragment {
 
 	public static final String FRAGMENTNAME = "FindFragment";
 	private View mVRoot;
-	
+
 	private TitleBar mTb;
 	private ListView mLvFind;
 
-	private String[] mArrFind = { "关于" };
-	
+	private String[] mArrFind = { "关于", "设置默认召唤师" };
+
 	private AdapterList mAdapter;
 
 	@Override
@@ -49,19 +49,21 @@ public class FindFragment extends BaseFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		
+
 	}
-	
-	private void initCtrl(){
+
+	private void initCtrl() {
 		mTb = (TitleBar) mVRoot.findViewById(R.id.titlebar);
 		mLvFind = (ListView) mVRoot.findViewById(R.id.lv_find);
-		
+
 		mTb.setLeftVisibility(View.INVISIBLE);
 		mTb.setRightVisibility(View.INVISIBLE);
-		
+
 		List<SimpleTool> items = new ArrayList<SimpleTool>();
-		items.add(new SimpleTool(-1, "关于"));
-		
+		for (int i = 0; i < mArrFind.length; i++) {
+			items.add(new SimpleTool(-1, mArrFind[i]));
+		}
+
 		mAdapter = new AdapterList(LayoutInflater.from(getActivity()), items);
 		mLvFind.setAdapter(mAdapter);
 		mLvFind.setOnItemClickListener(new OnItemClickListener() {
@@ -69,10 +71,21 @@ public class FindFragment extends BaseFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				Intent it = new Intent(getActivity(), AboutActivity.class);
-				startActivity(it);
-				getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-							android.R.anim.slide_out_right);
+				switch (position) {
+				case 0: {
+					Intent it = new Intent(getActivity(), AboutActivity.class);
+					startActivity(it);
+					break;
+				}
+				case 1: {
+					Intent it = new Intent(getActivity(), SearchSummonerActivity.class);
+					it.putExtra(SearchSummonerActivity.EXTRA_ISFORSETSUMMONER, true);
+					startActivity(it);
+					break;
+				}
+				default:
+					break;
+				}
 			}
 		});
 	}

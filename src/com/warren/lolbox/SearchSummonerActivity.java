@@ -1,6 +1,8 @@
 package com.warren.lolbox;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.Header;
 
@@ -21,6 +23,9 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.warren.lolbox.model.IListener;
+import com.warren.lolbox.url.URLUtil;
+import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
@@ -29,6 +34,8 @@ import com.warren.lolbox.widget.TitleBar;
  * @date 2014年12月28日
  */
 public class SearchSummonerActivity extends BaseActivity {
+
+	public static final String EXTRA_ISFORSETSUMMONER = "EXTRA_ISFORSETSUMMONER";
 
 	String strUrl = "http://zdl.mbox.duowan.com/phone/playerDetailNew.php?"
 				+ "sn=%E7%94%B5%E4%BF%A1%E5%8D%81%E5%9B%9B&pn=%E8%BF%98%E5%9C%A8%E7%AD%89%E5%BE%85";
@@ -42,7 +49,7 @@ public class SearchSummonerActivity extends BaseActivity {
 	private static String[] arrServers = { "电信一", "电信二", "电信三", "电信四", "电信五", "电信六", "电信七", "电信八",
 			"电信九", "电信十", "电信十一", "电信十二", "电信十三", "电信十四", "电信十五", "电信十六", "电信十七", "电信十八", "电信十九",
 			"网通一", "网通二", "网通三", "网通四", "网通五", "网通六", "网通七", "教育一" };
-	
+
 	private TitleBar mTb;
 	private EditText mEtSummonerName;
 	private Spinner mSpServer;
@@ -51,15 +58,18 @@ public class SearchSummonerActivity extends BaseActivity {
 
 	private int mServerIndex = 0;
 
+	private boolean mIsForSetSummoner = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mIsForSetSummoner = getIntent().getBooleanExtra(EXTRA_ISFORSETSUMMONER, false);
 		setContentView(R.layout.activity_searchsummoner);
 		initCtrl();
 	}
 
 	private void initCtrl() {
-		
+
 		mTb = (TitleBar) findViewById(R.id.titlebar);
 
 		mEtSummonerName = (EditText) findViewById(R.id.et_summonername);
@@ -67,10 +77,17 @@ public class SearchSummonerActivity extends BaseActivity {
 		mBtnSearch = (Button) findViewById(R.id.btn_search);
 		mLvHistory = (ListView) findViewById(R.id.lv_search);
 
+		if (mIsForSetSummoner) {
+			mTb.setText("设置默认召唤师");
+			mBtnSearch.setText("设置");
+		} else {
+			mTb.setText("搜索");
+			mBtnSearch.setText("搜索");
+		}
+
 		ArrayAdapter<String> adapterSp = new ArrayAdapter<String>(this, R.layout.textview_spinner,
 					arrServerNames);
 		mSpServer.setAdapter(adapterSp);
-
 
 		mSpServer.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -93,7 +110,58 @@ public class SearchSummonerActivity extends BaseActivity {
 								.show();
 					return;
 				}
-				startSearch(mEtSummonerName.getText().toString().trim(), arrServers[mServerIndex]);
+				if (mIsForSetSummoner) {
+					String strUrl = URLUtil.getURL_SummonerInfo(mEtSummonerName.getText()
+								.toString().trim(), arrServers[mServerIndex]);
+					httpGet(strUrl, SystemConfig.getIntance().getCommHead(),
+								new IListener<String>() {
+
+									@Override
+									public void onCall(String strJson) {
+										if (StringUtils.isNullOrZero(strJson)) {
+											Toast.makeText(SearchSummonerActivity.this, "查询召唤师失败",
+														Toast.LENGTH_SHORT).show();
+											return;
+										}
+										jsonParseMap(
+													strJson,
+													new IListener<Map<String, HashMap<String, Object>>>() {
+
+														@Override
+														public void onCall(
+																	Map<String, HashMap<String, Object>> map) {
+															if (map == null
+																		|| !map.containsKey(mEtSummonerName
+																					.getText()
+																					.toString()
+																					.trim())) {
+																Toast.makeText(
+																			SearchSummonerActivity.this,
+																			"查询召唤师失败",
+																			Toast.LENGTH_SHORT)
+																			.show();
+																return;
+															}
+
+															SystemConfig.getIntance()
+																		.setDefaultSummonerName(
+																					mEtSummonerName
+																								.getText()
+																								.toString()
+																								.trim());
+															SystemConfig.getIntance()
+																		.setDefaultSummonerServer(
+																					arrServers[mServerIndex]);
+
+															finish();
+														}
+													});
+									}
+								});
+				} else {
+					startSearch(mEtSummonerName.getText().toString().trim(),
+								arrServers[mServerIndex]);
+				}
 			}
 		});
 

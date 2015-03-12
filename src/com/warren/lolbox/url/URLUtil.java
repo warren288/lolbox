@@ -214,4 +214,51 @@ public class URLUtil {
 					"http://box.dwstatic.com/apiNewsList.php?action=topic&topicId=%s", strTopicId);
 	}
 
+	/**
+	 * 取召唤师简要信息
+	 * @param strSummonName
+	 * @param strSummonServer
+	 * @return
+	 */
+	public static final String getURL_SummonerInfo(String strSummonName, String strSummonServer) {
+		// http://lolbox.duowan.com/phone/apiCheckUser.php?action=getPlayersInfo&serverName=%E7%94%B5%E4%BF%A1%E5%8D%81%E5%9B%9B&target=%E8%BF%98%E5%9C%A8A%E7%AD%89%E5%BE%85
+		try {
+			return String
+						.format("http://lolbox.duowan.com/phone/apiCheckUser.php?action=getPlayersInfo&serverName=%s&target=%s",
+									URLEncoder.encode(strSummonServer, "UTF-8"),
+									URLEncoder.encode(strSummonName, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			LogTool.exception(e);
+			return null;
+		}
+	}
+
+	/**
+	 * 取召唤师详情URL
+	 * @param strSummonName
+	 * @param strSummonServer
+	 * @return
+	 */
+	public static final String getURL_SummonerDetail(String strSummonName, String strSummonServer) {
+		try {
+			return String
+						.format("http://zdl.mbox.duowan.com/phone/playerDetailNew.php?lolboxAction=toPlayerDetail&sn=%s&pn=%s",
+									URLEncoder.encode(strSummonServer, "UTF-8"),
+									URLEncoder.encode(strSummonName, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			LogTool.exception(e);
+			return null;
+		}
+	}
+
+	/**
+	 * 取召唤师头像
+	 * @param strSummonerImageId
+	 * @return
+	 */
+	public static final String getUrl_SummonerImage(String strSummonerImageId) {
+		return String.format("http://img.lolbox.duowan.com/profileIcon/profileIcon%s.jpg",
+					strSummonerImageId);
+	}
+
 }

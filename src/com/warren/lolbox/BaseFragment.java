@@ -1,5 +1,6 @@
 package com.warren.lolbox;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,6 @@ import com.warren.lolbox.util.StringUtils;
 
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
 
-	
 	/**
 	 * 异步访问指定路径，然后再异步解析Json
 	 * @param strUrl
@@ -55,7 +55,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
 			}
 		});
 	}
-	
+
 	/**
 	 * 异步访问指定路径
 	 * @param strUrl
@@ -86,5 +86,16 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
 	public <T> void jsonParseList(final String strJson, final Class<T> cls,
 				final IListener<List<T>> listener) {
 		AppContext.getApp().getJsonManager().parseList(strJson, cls, listener);
+	}
+
+	/**
+	 * 异步解析指定Json
+	 * @param strJson
+	 * @param listener
+	 */
+	public <T> void jsonParseMap(final String strJson,
+				final IListener<Map<String, HashMap<String, Object>>> listener) {
+
+		AppContext.getApp().getJsonManager().parseMap(strJson, listener);
 	}
 }

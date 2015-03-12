@@ -12,8 +12,8 @@
         android:background="@color/darkblue"
         android:orientation="horizontal"
         warren:left_img="@drawable/lolbox_search_btn_unpressed"
-        warren:right_img="@drawable/box_more_icon"
         warren:left_imgbackground="@drawable/bg_btn_title"
+        warren:right_img="@drawable/box_more_icon"
         warren:right_imgbackground="@drawable/bg_btn_title"
         warren:title="工具"
         warren:titleColor="@color/greenblue"
@@ -26,139 +26,166 @@
         android:background="@drawable/zdl_top_bg" >
 
         <RelativeLayout
-            android:id="@+id/rl_summoner_detail"
+            android:id="@+id/rl_summoner_root"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/halftransparent_white" >
+            android:layout_height="match_parent"
+            android:visibility="visible" >
 
-            <TextView
-                android:id="@+id/tv_summoner_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:drawableRight="@drawable/zdl_arrow"
-                android:text="召唤师详情"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+            <RelativeLayout
+                android:id="@+id/rl_summoner_detail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/halftransparent_white" >
+
+                <TextView
+                    android:id="@+id/tv_summoner_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/zdl_arrow"
+                    android:text="召唤师详情"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_summoner_simple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_summoner_detail"
+                android:background="@color/halftransparent_black"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp" >
+
+                <ImageView
+                    android:id="@+id/img_summoner_pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/gamester_group_default_avatar" />
+
+                <LinearLayout
+                    android:id="@+id/ll_summoner_names"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/img_summoner_pic"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp" >
+
+                    <TextView
+                        android:id="@+id/tv_summoner_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="传说中的好人"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_summoner_server"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="水晶之痕"
+                            android:textColor="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/tv_summoner_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="白银/V"
+                            android:textColor="@android:color/darker_gray" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="invisible" >
+
+                        <TextView
+                            android:id="@+id/tv_summoner_up"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="10000"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_summoner_down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_summoner_power"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_summoner_powername"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:background="@color/bluegreen"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="战斗力"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_summoner_powervalue"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="10000"
+                        android:textColor="@color/bluegreen"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_summoner_simple"
+            android:id="@+id/rl_summoner_add"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/rl_summoner_detail"
-            android:background="@color/halftransparent_black"
-            android:paddingBottom="15dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="15dp" >
+            android:layout_centerHorizontal="true" >
 
-            <ImageView
-                android:id="@+id/img_summoner_pic"
+            <Button
+                android:id="@+id/btn_summoner_add"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:scaleType="fitCenter"
-                android:src="@drawable/gamester_group_default_avatar" />
-
-            <LinearLayout
-                android:id="@+id/ll_summoner_names"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/img_summoner_pic"
-                android:orientation="vertical"
-                android:paddingLeft="10dp" >
-
-                <TextView
-                    android:id="@+id/tv_summoner_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="传说中的好人"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/tv_summoner_server"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="水晶之痕"
-                        android:textColor="@android:color/darker_gray" />
-
-                    <TextView
-                        android:id="@+id/tv_summoner_level"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="白银/V"
-                        android:textColor="@android:color/darker_gray" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/tv_summoner_up"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="10000"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/tv_summoner_down"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="100"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_summoner_power"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentRight="true"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/tv_summoner_powername"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2"
-                    android:background="@color/bluegreen"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="战斗力"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_summoner_powervalue"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3"
-                    android:background="@android:color/white"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="10000"
-                    android:textColor="@color/bluegreen"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                android:background="@drawable/bg_btn_search"
+                android:padding="5dp"
+                android:text="设置默认召唤师"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
         </RelativeLayout>
     </RelativeLayout>
 
