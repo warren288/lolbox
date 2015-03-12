@@ -14,7 +14,6 @@
         android:layout_margin="8dp"
         android:background="@android:color/darker_gray"
         android:gravity="center_vertical|center_horizontal"
-        android:text="2014年12月3日 下午15：50"
         android:textColor="@android:color/white" />
 
     <LinearLayout
@@ -38,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_dw_lolapp" />
+                android:src="@drawable/dl_loading_img" />
 
             <TextView
                 android:id="@+id/tv_main"
@@ -51,7 +50,6 @@
                 android:gravity="center_horizontal"
                 android:paddingBottom="2dp"
                 android:paddingTop="2dp"
-                android:text="hahaha"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -77,7 +75,7 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_dw_lolapp" />
+                android:src="@drawable/dl_loading_img" />
 
             <TextView
                 android:id="@+id/tv_1"
@@ -113,7 +111,7 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_dw_lolapp" />
+                android:src="@drawable/dl_loading_img" />
 
             <TextView
                 android:id="@+id/tv_2"
@@ -149,7 +147,7 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_dw_lolapp" />
+                android:src="@drawable/dl_loading_img" />
 
             <TextView
                 android:id="@+id/tv_3"
