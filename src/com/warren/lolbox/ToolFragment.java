@@ -257,23 +257,35 @@ public class ToolFragment extends BaseFragment {
 
 	private void openGridActivity(int position) {
 
-		if (position == 0) {
+		switch (position) {
+		case 0: {
 			Intent it = new Intent(getActivity(), HeroListActivity.class);
 			startActivity(it);
 			getActivity().overridePendingTransition(android.R.anim.slide_in_left,
 						android.R.anim.slide_out_right);
-		} else if (position == 1) {
+			break;
+		}
+
+		case 1: {
 
 			Intent it = new Intent(getActivity(), BaikeActivity.class);
 			startActivity(it);
-			getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-						android.R.anim.slide_out_right);
-		} else if (position == 2) {
+			break;
+		}
+		case 2: {
 
 			Intent it = new Intent(getActivity(), HotNewsActivity.class);
 			startActivity(it);
-			getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-						android.R.anim.slide_out_right);
+			break;
+		}
+		case 3: {
+
+			Intent it = new Intent(getActivity(), WeatherActivity.class);
+			startActivity(it);
+			break;
+		}
+		default:
+			break;
 		}
 	}
 

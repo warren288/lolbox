@@ -14,9 +14,7 @@
         warren:left_img="@drawable/lolbox_titleview_return_default"
         warren:left_imgbackground="@drawable/bg_btn_title"
         warren:right_imgbackground="@drawable/bg_btn_title"
-        warren:title="资讯"
-        warren:titleColor="@color/greenblue"
-        warren:titleSize="9sp" />
+        warren:title="资讯" />
 
     <WebView
         android:id="@+id/wv_detail"

@@ -132,6 +132,10 @@
             android:name="com.warren.lolbox.AboutActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
+         <activity
+            android:name="com.warren.lolbox.WeatherActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+        </activity>
     </application>
 
 </manifest>
