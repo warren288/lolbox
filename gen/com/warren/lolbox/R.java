@@ -945,7 +945,7 @@ containing a value of this type.
         public static final int customPanel=0x7f09008d;
         public static final int disabled=0x7f090001;
         public static final int et_summonername=0x7f090078;
-        public static final int fl_inner=0x7f0900c4;
+        public static final int fl_inner=0x7f0900c6;
         public static final int fl_main_frags=0x7f09006e;
         public static final int flip=0x7f090007;
         public static final int grid=0x7f090022;
@@ -963,7 +963,7 @@ containing a value of this type.
         public static final int img_des_3=0x7f09001a;
         public static final int img_des_4=0x7f09001c;
         public static final int img_des_5=0x7f09001e;
-        public static final int img_download=0x7f0900ce;
+        public static final int img_download=0x7f0900d0;
         public static final int img_enemy_1=0x7f090036;
         public static final int img_enemy_2=0x7f090038;
         public static final int img_find=0x7f0900ad;
@@ -977,10 +977,10 @@ containing a value of this type.
         public static final int img_partner_1=0x7f09002d;
         public static final int img_partner_2=0x7f09002f;
         public static final int img_summoner_pic=0x7f0900b6;
-        public static final int img_title_left=0x7f0900ca;
-        public static final int img_title_right=0x7f0900cb;
+        public static final int img_title_left=0x7f0900cc;
+        public static final int img_title_right=0x7f0900cd;
         public static final int img_tool=0x7f0900a1;
-        public static final int img_video=0x7f0900cd;
+        public static final int img_video=0x7f0900cf;
         public static final int imggp_ability=0x7f090028;
         public static final int imggp_group=0x7f090013;
         public static final int imggp_hq_jn=0x7f090064;
@@ -1004,7 +1004,7 @@ containing a value of this type.
         public static final int ll_news=0x7f0900a3;
         public static final int ll_nf=0x7f090068;
         public static final int ll_nf_content=0x7f090069;
-        public static final int ll_opers=0x7f0900cc;
+        public static final int ll_opers=0x7f0900ce;
         public static final int ll_partner=0x7f09002b;
         public static final int ll_partner_content=0x7f09002c;
         public static final int ll_qq=0x7f090056;
@@ -1014,11 +1014,12 @@ containing a value of this type.
         public static final int ll_summoner_names=0x7f0900b7;
         public static final int ll_summoner_power=0x7f0900bd;
         public static final int ll_tool=0x7f0900a0;
-        public static final int ll_tool_title=0x7f0900c9;
+        public static final int ll_tool_title=0x7f0900cb;
         public static final int ll_zq=0x7f09005c;
         public static final int ll_zq_content=0x7f09005d;
         public static final int lv_find=0x7f09009f;
         public static final int lv_groups=0x7f090020;
+        public static final int lv_menupop=0x7f0900c4;
         public static final int lv_search=0x7f09007b;
         public static final int lv_types=0x7f09000c;
         public static final int manualOnly=0x7f090002;
@@ -1030,10 +1031,10 @@ containing a value of this type.
         public static final int pullFromEnd=0x7f090004;
         public static final int pullFromStart=0x7f090005;
         public static final int pullUpFromBottom=0x7f090006;
-        public static final int pull_to_refresh_image=0x7f0900c5;
-        public static final int pull_to_refresh_progress=0x7f0900c6;
-        public static final int pull_to_refresh_sub_text=0x7f0900c8;
-        public static final int pull_to_refresh_text=0x7f0900c7;
+        public static final int pull_to_refresh_image=0x7f0900c7;
+        public static final int pull_to_refresh_progress=0x7f0900c8;
+        public static final int pull_to_refresh_sub_text=0x7f0900ca;
+        public static final int pull_to_refresh_text=0x7f0900c9;
         public static final int rl_1=0x7f090096;
         public static final int rl_2=0x7f090099;
         public static final int rl_3=0x7f09009c;
@@ -1101,13 +1102,14 @@ containing a value of this type.
         public static final int tv_hint_qq=0x7f090055;
         public static final int tv_hint_zq=0x7f09005b;
         public static final int tv_info=0x7f09000e;
-        public static final int tv_length=0x7f0900cf;
+        public static final int tv_length=0x7f0900d1;
         public static final int tv_level=0x7f09007d;
         public static final int tv_magicdefense=0x7f09004b;
         public static final int tv_main=0x7f090095;
         public static final int tv_materialdescription=0x7f090074;
         public static final int tv_materialmoney=0x7f090073;
         public static final int tv_materialname=0x7f090072;
+        public static final int tv_menu=0x7f0900c5;
         public static final int tv_monaregen=0x7f090049;
         public static final int tv_movement=0x7f090043;
         public static final int tv_news=0x7f0900a5;
@@ -1180,11 +1182,13 @@ containing a value of this type.
         public static final int fragment_gridonly=0x7f030022;
         public static final int frags_news_info_head=0x7f030023;
         public static final int griditem=0x7f030024;
-        public static final int pull_to_refresh_header_horizontal=0x7f030025;
-        public static final int pull_to_refresh_header_vertical=0x7f030026;
-        public static final int textview_spinner=0x7f030027;
-        public static final int titlebar=0x7f030028;
-        public static final int videoitem=0x7f030029;
+        public static final int pop_selector=0x7f030025;
+        public static final int pop_selector_item=0x7f030026;
+        public static final int pull_to_refresh_header_horizontal=0x7f030027;
+        public static final int pull_to_refresh_header_vertical=0x7f030028;
+        public static final int textview_spinner=0x7f030029;
+        public static final int titlebar=0x7f03002a;
+        public static final int videoitem=0x7f03002b;
     }
     public static final class string {
         public static final int app_name=0x7f070000;

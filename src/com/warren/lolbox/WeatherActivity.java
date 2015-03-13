@@ -33,7 +33,7 @@ public class WeatherActivity extends BaseActivity {
 	private void initCtrl() {
 		mTb = (TitleBar) findViewById(R.id.titlebar);
 		mWv = (WebView) findViewById(R.id.wv_detail);
-
+		mTb.setRightVisibility(View.INVISIBLE);
 		mTb.setText(TITLE);
 		mTb.setRightOpers(WEATHERHOME);
 		mTb.setRightOperListener(new IListener<String>() {

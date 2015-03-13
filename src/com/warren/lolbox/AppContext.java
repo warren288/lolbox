@@ -23,8 +23,10 @@ public class AppContext extends Application {
 	private AppNetManager netManager;
 	private AppJsonParserManager jsonManager;
 
-	private static final String UIL_CACHEFOLDER = Environment.getExternalStorageDirectory()
-				+ "/warrenlol/imageloader/cache";
+	public static final String UIL_CACHEFOLDER = Environment.getExternalStorageDirectory()
+				+ "/warrenlol/imageloader/cache/";
+	public static final String PICTURE_FOLDER = Environment.getExternalStorageDirectory()
+				+ "/warrenlol/picture/";
 
 	public static AppContext getApp() {
 		return app;
@@ -38,7 +40,8 @@ public class AppContext extends Application {
 	}
 
 	private void init() {
-
+		initFolder();
+		
 		imgLoader = ImageLoader.getInstance();
 		ImageLoaderConfiguration imgLoaderConfig = new ImageLoaderConfiguration.Builder(app)
 					.diskCache(new UnlimitedDiscCache(new File(UIL_CACHEFOLDER))).threadPoolSize(5)
@@ -48,6 +51,17 @@ public class AppContext extends Application {
 
 		netManager = AppNetManager.getInstance();
 		jsonManager = AppJsonParserManager.getInstance();
+	}
+	
+	private void initFolder(){
+		File fileImageLoader = new File(UIL_CACHEFOLDER);
+		if( ! fileImageLoader.exists()){
+			fileImageLoader.mkdirs();
+		}
+		File filePicture = new File(PICTURE_FOLDER);
+		if(! filePicture.exists()){
+			filePicture.mkdirs();
+		}
 	}
 
 	public ImageLoader getImgLoader() {

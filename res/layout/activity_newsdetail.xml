@@ -13,6 +13,7 @@
         android:orientation="horizontal"
         warren:left_img="@drawable/lolbox_titleview_return_default"
         warren:left_imgbackground="@drawable/bg_btn_title"
+        warren:right_img="@drawable/box_more_icon"
         warren:right_imgbackground="@drawable/bg_btn_title"
         warren:title="资讯" />
 

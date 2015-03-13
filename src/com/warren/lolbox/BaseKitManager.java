@@ -22,6 +22,7 @@ public class BaseKitManager {
 		it.putExtra(HeroDetailActivity.EXTRA_HEROENNAME, strHeroEnName);
 		activity.startActivity(it);
 	}
+
 	/**
 	 * 打开物品详情页面
 	 * @param activity
@@ -33,6 +34,7 @@ public class BaseKitManager {
 		it.putExtra(MaterialDetailActivity.EXTRA_MATERIALID, strMaterialId);
 		activity.startActivity(it);
 	}
+
 	/**
 	 * 打开比赛列表页面
 	 * @param activity
@@ -40,9 +42,10 @@ public class BaseKitManager {
 	 */
 	public static void openMatchList(BaseActivity activity, String strUrl) {
 
-		Intent intent = new Intent(activity, CombatListActivity.class);
-		intent.putExtra(CombatListActivity.EXTRA_URL, strUrl);
-		activity.startActivity(intent);
+		Intent it = new Intent(activity, BaseWebActivity.class);
+		it.putExtra(BaseWebActivity.EXTRA_URL, strUrl);
+		it.putExtra(BaseWebActivity.EXTRA_TITLE, "最近比赛");
+		activity.startActivity(it);
 	}
 
 	/**
@@ -51,31 +54,32 @@ public class BaseKitManager {
 	 * @param strUrl
 	 */
 	public static void openMatchDetail(BaseActivity activity, String strUrl) {
-		
-		Intent intent = new Intent(activity, CombatDetailActivity.class);
-		intent.putExtra(CombatDetailActivity.EXTRA_URL, strUrl);
-		activity.startActivity(intent);
+
+		Intent it = new Intent(activity, BaseWebActivity.class);
+		it.putExtra(BaseWebActivity.EXTRA_URL, strUrl);
+		it.putExtra(BaseWebActivity.EXTRA_TITLE, "比赛详情");
+		activity.startActivity(it);
 	}
-	
+
 	/**
 	 * 打开召唤师技能详情界面
 	 * @param activity
 	 * @param sa
 	 */
-	public static void openSummonerSkillDetail(BaseActivity activity, SummonerAbility sa){
-		
+	public static void openSummonerSkillDetail(BaseActivity activity, SummonerAbility sa) {
+
 		Intent it = new Intent(activity, SummonerAbilityDetailActivity.class);
 		it.putExtra(SummonerAbilityDetailActivity.EXTRA_SUMMONERABILITY, sa);
 		activity.startActivity(it);
 	}
-	
+
 	/**
 	 * 打开英雄出装界面
 	 * @param activity
 	 * @param strHeroEnName
 	 */
-	public static void openHeroZbTatic(BaseActivity activity, String strHeroEnName){
-		
+	public static void openHeroZbTatic(BaseActivity activity, String strHeroEnName) {
+
 		Intent it = new Intent(activity, HeroTaticActivity.class);
 		it.putExtra(HeroTaticActivity.EXTRA_HERONAME, strHeroEnName);
 		activity.startActivity(it);
@@ -86,37 +90,38 @@ public class BaseKitManager {
 	 * @param activity
 	 * @param strNewsId
 	 */
-	public static void openNewsDetail(BaseActivity activity, String strNewsId){
+	public static void openNewsDetail(BaseActivity activity, String strNewsId) {
 
 		Intent it = new Intent(activity, NewsDetailActivity.class);
 		it.putExtra(NewsDetailActivity.EXTRA_NEWSID, strNewsId);
 		activity.startActivity(it);
 	}
-	
+
 	/**
 	 * 打开专题页面
 	 * @param activity
 	 * @param strTopicId
 	 */
-	public static void openNewsTopic(BaseActivity activity, String strTopicId){
+	public static void openNewsTopic(BaseActivity activity, String strTopicId) {
 
 		Intent it = new Intent(activity, NewsTopicActivity.class);
 		it.putExtra(NewsTopicActivity.EXTRA_TOPICID, strTopicId);
 		activity.startActivity(it);
 	}
-	
+
 	/**
 	 * 打开召唤师详情页面
 	 * @param activity
 	 * @param strUrl
 	 */
-	public static void openSummonerDetail(BaseActivity activity, String strUrl){
-		
-		Intent it = new Intent(activity, SumonerDetailActivity.class);
-		it.putExtra(SumonerDetailActivity.EXTRA_URL, strUrl);
+	public static void openSummonerDetail(BaseActivity activity, String strUrl) {
+
+		Intent it = new Intent(activity, BaseWebActivity.class);
+		it.putExtra(BaseWebActivity.EXTRA_URL, strUrl);
+		it.putExtra(BaseWebActivity.EXTRA_TITLE, "召唤师");
 		activity.startActivity(it);
 	}
-	
+
 	/**
 	 * 打开指定URL相应的界面，用于webview中链接拦截
 	 * @date 2015.3.9 目前支持 查看装备详情、查看英雄详情、查看比赛列表、查看比赛详情
