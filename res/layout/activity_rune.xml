@@ -3,6 +3,7 @@
     xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <com.warren.lolbox.widget.TitleBar
@@ -11,14 +12,31 @@
         android:layout_height="45dp"
         android:background="@color/darkblue"
         android:orientation="horizontal"
-        warren:left_img="@drawable/lolbox_search_btn_unpressed"
+        warren:left_img="@drawable/lolbox_titleview_return_default"
         warren:left_imgbackground="@drawable/bg_btn_title"
-        warren:right_img="@drawable/box_more_icon"
-        warren:right_imgbackground="@drawable/bg_btn_title"
-        warren:title="发现"
+        warren:title="符文列表"
         warren:titleColor="@color/greenblue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/sp_level"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:id="@+id/sp_type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <ListView
-        android:id="@+id/lv_find"
+        android:id="@+id/lv_rune"
         style="@style/commonListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >

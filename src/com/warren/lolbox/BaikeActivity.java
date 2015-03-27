@@ -57,7 +57,7 @@ public class BaikeActivity extends BaseActivity {
 
 		mActivitys.add(MaterialTypesActivity.class);
 		mActivitys.add(GiftActivity.class);
-		mActivitys.add(FuwenActivity.class);
+		mActivitys.add(RuneActivity.class);
 		mActivitys.add(BestGroupActivity.class);
 		mActivitys.add(SummonerAbilityActivity.class);
 

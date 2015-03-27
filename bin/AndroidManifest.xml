@@ -81,7 +81,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.warren.lolbox.FuwenActivity"
+            android:name="com.warren.lolbox.RuneActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
         <activity

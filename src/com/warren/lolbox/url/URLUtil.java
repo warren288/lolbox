@@ -224,7 +224,8 @@ public class URLUtil {
 		// http://lolbox.duowan.com/phone/apiCheckUser.php?action=getPlayersInfo&serverName=%E7%94%B5%E4%BF%A1%E5%8D%81%E5%9B%9B&target=%E8%BF%98%E5%9C%A8A%E7%AD%89%E5%BE%85
 		try {
 			return String
-						.format("http://lolbox.duowan.com/phone/apiCheckUser.php?action=getPlayersInfo&serverName=%s&target=%s",
+						.format(Locale.CHINA,
+									"http://lolbox.duowan.com/phone/apiCheckUser.php?action=getPlayersInfo&serverName=%s&target=%s",
 									URLEncoder.encode(strSummonServer, "UTF-8"),
 									URLEncoder.encode(strSummonName, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -242,7 +243,8 @@ public class URLUtil {
 	public static final String getURL_SummonerDetail(String strSummonName, String strSummonServer) {
 		try {
 			return String
-						.format("http://zdl.mbox.duowan.com/phone/playerDetailNew.php?lolboxAction=toPlayerDetail&sn=%s&pn=%s",
+						.format(Locale.CHINA,
+									"http://zdl.mbox.duowan.com/phone/playerDetailNew.php?lolboxAction=toPlayerDetail&sn=%s&pn=%s",
 									URLEncoder.encode(strSummonServer, "UTF-8"),
 									URLEncoder.encode(strSummonName, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -257,8 +259,27 @@ public class URLUtil {
 	 * @return
 	 */
 	public static final String getUrl_SummonerImage(String strSummonerImageId) {
-		return String.format("http://img.lolbox.duowan.com/profileIcon/profileIcon%s.jpg",
+		return String.format(Locale.CHINA,
+					"http://img.lolbox.duowan.com/profileIcon/profileIcon%s.jpg",
 					strSummonerImageId);
 	}
 
+	/**
+	 * 取符文列表
+	 * @return
+	 */
+	public static final String getUrl_RuneList() {
+		return "http://lolbox.duowan.com/phone/apiRunes.php";
+	}
+
+	/**
+	 * 取符文图片
+	 * @param strType
+	 * @param level
+	 * @return
+	 */
+	public static final String getUrl_RuneImg(String strType, int level) {
+		return String.format(Locale.CHINA, "http://img.lolbox.duowan.com/runes/%s_%d.png", strType,
+					level);
+	}
 }
