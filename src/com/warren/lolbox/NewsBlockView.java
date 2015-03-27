@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +31,7 @@ import com.warren.lolbox.model.bean.PictureBlock;
 import com.warren.lolbox.model.bean.PictureInfo;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.StringUtils;
+import com.warren.lolbox.widget.ImageViewPager;
 
 /**
  * 资讯页面单页
@@ -52,7 +50,7 @@ public class NewsBlockView {
 	private ViewGroup mRootView;
 	private PullToRefreshListView mPtrlv;
 	private ListView mLv;
-	private ViewPager mVpHead;
+	private ImageViewPager mVpHead;
 
 	private NewsBlock mNewsBlock;
 	private PictureBlock mPicBlock;
@@ -63,7 +61,6 @@ public class NewsBlockView {
 	private int mCount = 1;
 
 	private AdapterInfo mAdapter;
-	private AdapterViewPager mAdapterHead;
 
 	private ImageLoader mImgLoader;
 
@@ -98,11 +95,6 @@ public class NewsBlockView {
 		mLv.setDivider(mContext.getResources().getDrawable(R.color.lightgrey));
 		mLv.setDividerHeight(1);
 
-		if (mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD)) {
-			mAdapterHead = new AdapterViewPager();
-			// mVpHead.setAdapter(mAdapterHead);
-			// mLv.addHeaderView(mVpHead);
-		}
 		mPtrlv.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
 			@Override
@@ -171,8 +163,10 @@ public class NewsBlockView {
 															mLstInfo.clear();
 															if (t.getHeaderline() != null) {
 																mLstHead.addAll(t.getHeaderline());
-																// mLv.addHeaderView(mVpHead);
-																mAdapterHead.notifyDataSetChanged();
+																if(mVpHead == null){
+																	mVpHead = initHead(mLv);
+																}
+																mVpHead.setNewsInfo(mLstHead);
 															}
 															mLstInfo.addAll(t.getData());
 															mAdapter.notifyDataSetChanged();
@@ -229,83 +223,13 @@ public class NewsBlockView {
 		return mTitle.getType().equals(TITLETYPE_NEWSWITHHEAD);
 	}
 
-	class AdapterViewPager extends PagerAdapter {
-
-		private View[] arrViewRoot;
-
-		public AdapterViewPager() {
-			arrViewRoot = new View[mLstHead == null ? 0 : mLstHead.size()];
-		}
-
-		@Override
-		public void notifyDataSetChanged() {
-			if (arrViewRoot == null || (mLstHead != null && arrViewRoot.length != mLstHead.size())) {
-				arrViewRoot = new View[mLstHead.size()];
-			}
-			super.notifyDataSetChanged();
-		}
-
-		@Override
-		public int getCount() {
-			return mLstHead == null ? 0 : mLstHead.size();
-		}
-
-		private View initView(final int position) {
-
-			View vRoot = LayoutInflater.from(mContext).inflate(R.layout.frag_news_info_head_item,
-						mVpHead, false);
-			ImageView img = (ImageView) vRoot.findViewById(R.id.img_head);
-			TextView tv = (TextView) vRoot.findViewById(R.id.tv_head);
-			mImgLoader.displayImage(mLstHead.get(position).getPhoto(), img);
-			tv.setText(mLstHead.get(position).getTitle());
-
-			vRoot.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-
-					BaseKitManager.openNewsDetail((BaseActivity) mContext, mLstHead.get(position)
-								.getId());
-				}
-			});
-
-			return vRoot;
-		}
-
-		@Override
-		public boolean isViewFromObject(View arg0, Object arg1) {
-			return arg0 == arg1;
-		}
-
-		@Override
-		public int getItemPosition(Object object) {
-			return super.getItemPosition(object);
-		}
-
-		@Override
-		public void destroyItem(View arg0, int arg1, Object arg2) {
-			((ViewPager) arg0).removeView(arrViewRoot[arg1]);
-		}
-
-		@Override
-		public Object instantiateItem(View arg0, int arg1) {
-			if (arrViewRoot[arg1] == null) {
-				arrViewRoot[arg1] = initView(arg1);
-			}
-			((ViewPager) arg0).addView(arrViewRoot[arg1]);
-			return arrViewRoot[arg1];
-		}
-
-		@Override
-		public void restoreState(Parcelable arg0, ClassLoader arg1) {
-		}
-
-		@Override
-		public Parcelable saveState() {
-			return null;
-		}
+	private ImageViewPager initHead(ViewGroup parent) {
+		mVpHead = (ImageViewPager) LayoutInflater.from(mContext).inflate(
+					R.layout.frags_news_info_head, parent, false);
+		mVpHead.setNewsInfo(mLstHead);
+		return mVpHead;
 	}
-
+	
 	private class AdapterInfo extends BaseAdapter {
 
 		@Override
@@ -321,14 +245,6 @@ public class NewsBlockView {
 		@Override
 		public long getItemId(int position) {
 			return 0;
-		}
-
-		private View initHead(ViewGroup parent) {
-			mVpHead = (ViewPager) LayoutInflater.from(mContext).inflate(
-						R.layout.frags_news_info_head, parent, false);
-			mAdapterHead = new AdapterViewPager();
-			mVpHead.setAdapter(mAdapterHead);
-			return mVpHead;
 		}
 
 		@Override
