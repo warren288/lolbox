@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="FlexableLayout">
+        <attr name="contract_height" format="dimension" />
+    </declare-styleable>
+    
     <declare-styleable name="ViewPagerIndicator">
         <attr name="item_count" format="integer" />
         <attr name="item_color" format="color|reference" />

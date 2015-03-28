@@ -16,8 +16,7 @@
         warren:right_imgbackground="@drawable/bg_btn_title"
         warren:rightopers="出装"
         warren:title="英雄详情"
-        warren:titleColor="@color/greenblue"
-        warren:titleSize="18sp" />
+        warren:titleColor="@color/greenblue" />
 
     <ScrollView
         android:layout_width="match_parent"

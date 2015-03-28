@@ -11,9 +11,9 @@
     <string name="toolmenu_liveshow">直播</string>
     <string name="toolmenu_reflecttest">LOL反应测试</string>
     <string name="toolmenu_baike">游戏百科</string>
-    <string name="pull_to_refresh_pull_label">Pull to refresh…</string>
-    <string name="pull_to_refresh_release_label">Release to refresh…</string>
-    <string name="pull_to_refresh_refreshing_label">Loading…</string>
+    <string name="pull_to_refresh_pull_label">刷新……</string>
+    <string name="pull_to_refresh_release_label">放开刷新……</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新……</string>
 
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
