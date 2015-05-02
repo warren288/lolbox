@@ -56,11 +56,9 @@
 
     <ListView
         android:id="@+id/lv_search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cacheColorHint="#FFFFFFFF"
-        android:divider="@color/lightgrey"
-        android:dividerHeight="0.5dp" >
+        style="@style/commonListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"  >
     </ListView>
 
 </LinearLayout>
